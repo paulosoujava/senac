@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:body>
+		 	  <div style="margin-top: -10px; ">
+    				<h5 class="center-align z-depth-2 card-panel teal lighten-2 white-text">Importe(s)</h5>
+  				</div>
+ 
+						
+		      <div class=" card-panel col.l12 white">		
+				<h:dataTable class="bordered highlight" value="#{beanImporte.egressoLis}"  var="cu"  border="1" >
+					
+					<h:column>    				
+				      <f:facet name="header">##</f:facet>    				
+				      #{cu.curso.id_curso}
+				   </h:column>
+					<h:column>    				
+				      <f:facet name="header">Curso</f:facet>    				
+				      #{cu.curso.nome_curso}
+				   </h:column>
+				   <h:column>    				
+				      <f:facet name="header">Unidade</f:facet>    				
+				      #{cu.curso.cidade.nome_cidade} - #{cu.curso.cidade.estado.sigla}  
+				   </h:column>
+				   <h:column>    				
+				      <f:facet name="header">Semestre/fase</f:facet>    				
+				      #{cu.ano} / #{cu.fase}
+				   </h:column>
+				   <h:column>    				
+				      <f:facet name="header">Data Importe</f:facet>    				
+				      #{cu.dataImporte}
+				   </h:column>
+		
+				   <h:column>    				
+				         <f:facet name="header">Opção</f:facet> 
+				         <h:form>   
+				         <h:commandLink action="#{beanImporte.showTableLits(cu.curso.id_curso)}"  class="btn blue" > 
+				             <i class="material-icons green-text  tooltipped white-text" data-position="bottom" data-tooltip="Clique para Visualizar">visibility</i>
+				          </h:commandLink>		
+				     <h:commandLink action="#{beanImporte.showTableAdd(cu.curso.id_curso)}"  class="btn green" > 
+				             <i class="material-icons white-text  tooltipped" data-position="bottom" data-tooltip="Clique para Adicionar">add</i>
+				          </h:commandLink>	
+                        </h:form>
+                     </h:column>
+				</h:dataTable>
+			</div>
+			
+			 <!--## LISTA DO BANCO DE DADOS  --> 	
+</h:body>		
+</html>

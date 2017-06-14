@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+
+	<div class="row">
+		<div class="col s12 m12">
+
+			<div class="card  darken-1">
+
+				<div class="card-content black-text">
+					<span class="card-title">Dados Pessoais </span>
+					<div class="row">
+						<!--  ###BEGIN RECADOS  -->
+						<h:panelGroup rendered="#{beanEditarAluno.msg_erro.length() > 0}">
+							<div class="row">
+								<div class="card #{beanEditarAluno.msg_color}"
+									style="padding: 5px">
+									<div class="row">
+										<i class="material-icons right">#{beanEditarAluno.msg_icon}</i>
+										<p class="flow-text">#{beanEditarAluno.msg_erro}</p>
+
+									</div>
+								</div>
+							</div>
+						</h:panelGroup>
+						<!--  ###END RECADOS  -->
+
+
+
+						<!--### DADOS PESSOAIS -->
+						<h:form class="col s12">
+								<div class="row">
+
+									<div class="input-field col s6">
+										<h:inputText value="#{beanEditarAluno.pessoa.primeiro_nome}"
+											required="true" requiredMessage="Digite o nome do curso"
+											id="nomecurso" class="validate">
+											<f:validateLength for="nomecurso" minimum="1" />
+										</h:inputText>
+										<h:message for="nomecurso" style="color:red; " />
+										<label for="nomecurso" class="active">Primeiro Nome</label>
+									</div>
+									<div class="input-field col s6">
+										<h:inputText value="#{beanEditarAluno.pessoa.ultimo_nome}"
+											required="true" requiredMessage="Digite ultimo nome"
+											id="siglacurso" class="validate">
+											<f:validateLength for="nomeUltimo" minimum="1" />
+										</h:inputText>
+										<h:message for="nomeUltimo" style="color:red; " />
+										<label for="nomeUltimo" class="active">Ultimo Nome</label>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="input-field col s6">
+										<h:inputText value="#{beanEditarAluno.pessoa.telefone}"
+											required="true" requiredMessage="Digite um telefone"
+											id="tel" class="validate">
+											<f:validateLength for="tel" minimum="1" />
+										</h:inputText>
+										<h:message for="tel" style="color:red; " />
+										<label for="tel" class="active">Telefone</label>
+									</div>
+									<div class="input-field col s6">
+										<h:inputText value="#{beanEditarAluno.pessoa.sexo}" id="Sexo"
+											required="true"
+											requiredMessage="Digite p sexo"
+											class="validate">
+										</h:inputText>
+										<h:message showDetail="Sexo" showSummary="true" for="fase"
+											style="color:red; " />
+										<label for="Sexo" class="active">Sexo</label>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="input-field col s6">
+										<h:inputText value="#{beanEditarAluno.pessoa.cpf}"
+											required="true" requiredMessage="Qual cpf"
+											id="cpf" class="validate">
+											<f:validateLength for="cpf" minimum="1" />
+										</h:inputText>
+										<h:message for="cpf" style="color:red; " />
+										<label for="cpf" class="active">Cpf</label>
+									</div>
+									<div class="input-field col s6">
+										<h:inputText value="#{beanEditarAluno.pessoa.data_nascimento}"
+											required="true" requiredMessage="Qual a data de nascimento"
+											id="dtaNasc" class="validate">
+											<f:validateLength for="dtNasc" minimum="1" />
+										</h:inputText>
+										<h:message for="dtNasc" style="color:red; " />
+										<label for="dtNasc" class="active">Data de Nascimento</label>
+									</div>
+								</div>
+
+
+
+								<div class="card-action">
+									<div class="row">
+										<h:commandButton class="btn right" 
+											action="#{beanEditarAluno.editarPessoa(beanEditarAluno.pessoa)}"
+											value="Editar">
+
+										</h:commandButton>
+
+										
+
+									</div>
+								</div>
+
+
+
+							</h:form>
+					
+						
+						<h:form class="col s12">
+								<div class="row">
+	<span class="card-title">Dados Aluno </span>
+									<div class="input-field col s6">
+										<h:inputText value="#{beanEditarAluno.aluno.matricula}"
+											required="true" requiredMessage="Matricula"
+											id="mat" class="validate">
+											<f:validateLength for="mat" minimum="1" />
+										</h:inputText>
+										<h:message for="mat" style="color:red; " />
+										<label for="mat" class="active">Matricula </label>
+									</div>
+									<div class="input-field col s6">
+										<h:inputText value="#{beanEditarAluno.aluno.form_egresso}"
+											required="true" requiredMessage="Forma de egresso"
+											id="eg" class="validate">
+											<f:validateLength for="eg" minimum="1" />
+										</h:inputText>
+										<h:message for="eg" style="color:red; " />
+										<label for="eg" class="active">Forma de Egresso</label>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="input-field col s6">
+										<h:inputText value="#{beanEditarAluno.aluno.situcao}"
+											required="true" requiredMessage="Qual a situação do aluno"
+											id="sit" class="validate">
+											<f:validateLength for="sit" minimum="1" />
+										</h:inputText>
+										<h:message for="sit" style="color:red; " />
+										<label for="sit" class="active">Situação</label>
+									</div>
+								</div>
+									<div class="card-action">
+									<div class="row">
+										<h:commandButton class="btn right" 
+											action="#{beanEditarAluno.editarAluno(beanEditarAluno.aluno)}"
+											value="Editar">
+
+										</h:commandButton>
+
+										
+
+									</div>
+								</div>
+
+
+
+							</h:form>
+						
+							<h:form>
+							   <h:commandLink action="#{beanEditarAluno.backList()}" class="btn blue" value="Voltar" />
+						   </h:form>	
+					
+						
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+</h:body>
+</html>

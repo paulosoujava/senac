@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+
+	<div class="row">
+		<div class="col s12 m4 l2">
+			<p>&nbsp;</p>
+		</div>
+		<div class="col s12 m4 l8">
+			<div class="row">
+				<div class="col s12 m12 ">
+					<h:form>
+						<div class="card  darken-1">
+							<div class="card-content black-text">
+								<span class="card-title">Editar Endereço</span>
+								<!--  ###BEGIN RECADOS  -->
+								<h:panelGroup rendered="#{beanEndereco.msg_erro.length() > 0}">
+									<div class="row"
+										style=" border-bottom:1px solid #{beanEndereco.msg_color}">
+
+										<div class="row">
+											<i
+												class="material-icons right #{beanEndereco.msg_color}-text">#{beanEndereco.msg_icon}</i>
+											<p class="flow-text  #{beanEndereco.msg_color}-text">#{beanEndereco.msg_erro}</p>
+
+										</div>
+
+									</div>
+									<br />
+									<br />
+									<br />
+									<br />
+								</h:panelGroup>
+								<!--  ###END RECADOS  -->
+
+								<div class="row">
+
+									<div class="row">
+										<div class="input-field col s6">
+
+											<label for="nomecurso" class="active">Qual o Estado.</label>
+											<h:selectOneMenu value="#{beanEndereco.idEstado}" valueChangeListener="#{beanCurso.ShowCidades}"
+												onchange="submit()">
+											
+												<f:selectItems value="#{beanEndereco.lEstado}" var="r"
+													itemValue="#{r.id_estado}" itemLabel="#{r.nome}" />
+											</h:selectOneMenu>
+
+
+										</div>
+									</div>
+
+									
+										<div class="row">
+											<div class="input-field col s6">
+												<label for="nomecurso" class="active">Qual a Cidade.</label>
+												<h:selectOneMenu value="#{beanEndereco.idCidade}">
+													<f:selectItems value="#{beanEndereco.lCidade}" var="r"
+														itemValue="#{r.id_cidade}" itemLabel="#{r.nome_cidade}" />
+													<f:validateLength for="selectCidade" minimum="1" />
+
+												</h:selectOneMenu>
+
+
+
+											</div>
+										</div>
+										<div class="row">
+											<div class="input-field col s6">
+												<h:inputText id="endereco" class="validate"
+													value="#{beanEndereco.endereco.logradouro}" />
+												<label for="endereco" data-error="Digite seu endereço"
+													data-success="ok">Endereço</label>
+											</div>
+											<div class="input-field col s6">
+												<h:inputText id="numero" type="text" class="validate"
+													value="#{beanEndereco.endereco.numero}" />
+												<label for="numero">Número</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="input-field col s6">
+												<h:inputText id="comp" class="validate"
+													value="#{beanEndereco.endereco.comp}" />
+												<label for="comp" data-error="Complemento" data-success="ok">Complemento</label>
+											</div>
+											<div class="input-field col s6">
+												<h:inputText id="referencia" type="text" class="validate"
+													value="#{beanEndereco.endereco.ref}" /> <label
+													for="referencia">Referencia</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="input-field col s6">
+												<h:inputText id="bai" class="validate"
+													value="#{beanEndereco.endereco.rua}" />
+												<label for="bai" data-error="Complemento" data-success="ok">Bairro</label>
+											</div>
+											<div class="input-field col s6">
+												<h:inputText  id="cep" type="text" class="validate"
+													value="#{beanEndereco.endereco.cep}" /> <label for="cep">CEP</label>
+											</div>
+										</div>
+										<div class="card-action">
+											<div class="row">
+												<h:commandButton action="#{beanEndereco.editEndereco( beanEndereco.endereco )}"
+													value="Cadastrar" class="btn right" />
+											</div>
+										</div>
+								</div>
+							</div>
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</h:body>
+
+</html>

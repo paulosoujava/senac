@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<!-- 
+	
+	(empresa ou instituição contratante, cargo ou
+
+função, tipo de trabalho, data de ingresso, data de saída)
+	Tabela Tipo de Trabalho (código, tipo)
+
+Valores possíveis do atributo tipo: estágio, contratação CLT, concurso, etc.
+Tabela FormularioExterno (endereço do link, idUsuarioCadastrante, dataCadastro,
+
+idCurso)
+	 -->
+
+<h:body>
+	<div class="row">
+		<div class="col s12 m4 l2">
+			<p>&nbsp;</p>
+		</div>
+		<div class="col s12 m4 l8">
+			<div class="row">
+				<div class="col s12 m12 ">
+					<div class="card  darken-1">
+						<div class="card-content black-text">
+							<span class="card-title">Meu Mini Curriculo</span>
+
+							<!--  ###BEGIN RECADOS  -->
+							<h:panelGroup rendered="#{beanExperiencia.msg_erro.length() > 0}">
+								<div class="row"
+									style=" border-bottom:1px solid #{beanExperiencia.msg_color}">
+
+									<div class="row">
+										<i
+											class="material-icons right #{beanExperiencia.msg_color}-text">#{beanExperiencia.msg_icon}</i>
+										<p class="flow-text  #{beanExperiencia.msg_color}-text">#{beanExperiencia.msg_erro}</p>
+
+									</div>
+
+								</div>
+								<br />
+								<br />
+								<br />
+								<br />
+							</h:panelGroup>
+							<!--  ###END RECADOS  -->
+							<!-- FORM CADASTRO DO CURRICULO -->
+							<div class="row">
+								<h:form>
+ 					
+									<div class="row">
+										<div class="input-field col s12">
+											<h:inputText id="tI" class="validate"
+												value="#{beanExperiencia.experiencia.txt_impacto}" />
+											<label for="tI" data-error="" data-success="ok">Texto
+												de Impacto</label>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="input-field col s12">
+											<h:inputText value="#{beanExperiencia.experiencia.txt_livre}"
+												rows="5" escape="false" id="textarea1"
+												class="materialize-textarea" />
+											<label for="txtLivre" data-error="" data-success="ok">Fale
+												um pouco sobre sua formação cademica, seus objetivos...</label>
+										</div>
+
+									</div>
+									<div class="row">
+										<h:panelGroup
+											rendered="#{!beanExperiencia.flag_cadastrar_empresa}">
+											<h:commandButton
+												action="#{beanExperiencia.cadastrar(beanExperiencia.experiencia)}"
+												value="Cadastrar" class="btn " />
+										</h:panelGroup>
+										<h:panelGroup
+											rendered="#{beanExperiencia.flag_cadastrar_empresa}">
+											<h:commandButton
+												action="#{beanExperiencia.editar(beanExperiencia.experiencia)}"
+												value="Editar" class="btn " />
+										</h:panelGroup>
+
+									</div>
+
+								</h:form>
+
+							</div>
+						</div>
+
+					</div>
+
+					<!-- TABLE DE EMPRESAS DO CURRICULO PARA ADD EDITAR OU EXCLUIR -->
+					<h:panelGroup rendered="#{beanExperiencia.flag_cadastrar_empresa}">
+						<h:form>
+							<h:commandButton action="#{beanExperiencia.cadastrarEmpresaNova}"
+								value="Cadastrar Empresa" class="right blue btn" />
+						</h:form>
+						<h:dataTable rendered="#{beanExperiencia.myListEmpresa.size() > 0 }" class="bordered highlight" var="e" value="#{beanExperiencia.myListEmpresa}">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Empresa" />
+								</f:facet>
+								<h:outputText value="#{e.empresa}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Função" />
+								</f:facet>
+								<h:outputText value="#{e.funcao}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Entrada" />
+								</f:facet>
+								<h:outputText value="#{e.data_entrada}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Saida" />
+								</f:facet>
+								<h:outputText value="#{e.data_saida}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Texto Livre" />
+								</f:facet>
+								<h:outputText value="#{e.txt_livre}" />
+								<h:inputHidden value="#{e.idEmpresa}" />
+								<h:inputHidden value="#{e.idAluno}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Opção" />
+								</f:facet>
+								<h:form>
+								<h:commandButton
+												action="#{beanExperiencia.goToEmpresa(e)}"
+												value="Editar" class="btn green" />
+								<h:commandButton
+												action="#{beanExperiencia.deleteEmpresa(e)}"
+												value="Deletar" class="btn red" />
+								</h:form>
+							</h:column>
+						</h:dataTable>
+
+					</h:panelGroup>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</h:body>
+
+</html>

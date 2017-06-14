@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<!-- 
+         
+         USO DO:
+           Pass Through Attributes;
+		   Pass Through Elements;	
+		   
+		   para válidaçao em html 5
+		   
+          http://blog.triadworks.com.br/suporte-a-html5-com-jsf-2-2
+      
+       -->
+<h:body>
+	<div class="row">
+		<div class="col s12 m4 l2">
+			<p>&nbsp;</p>
+		</div>
+		<div class="col s12 m4 l8">
+			<div class="row">
+				<div class="col s12 m12 ">
+					<h:form>
+						<div class="card  darken-1">
+							<div class="card-content black-text">
+								<span class="card-title">Editar Dados</span>
+
+								<!--  ###BEGIN RECADOS  -->
+								<h:panelGroup
+									rendered="#{beanEditarAluno.msg_erro.length() > 0}">
+									<div class="row"
+										style=" border-bottom:1px solid #{beanEditarAluno.msg_color}">
+
+										<div class="row">
+											<i
+												class="material-icons right #{beanEditarAluno.msg_color}-text">#{beanEditarAluno.msg_icon}</i>
+											<p class="flow-text  #{beanEditarAluno.msg_color}-text">#{beanEditarAluno.msg_erro}</p>
+
+										</div>
+
+									</div>
+									<br />
+									<br />
+									<br />
+									<br />
+								</h:panelGroup>
+								<!--  ###END RECADOS  -->
+								<div class="row">
+									<div class="row">
+										<div class="input-field col s6">
+											<h:inputText id="first_name"
+												value="#{beanEditarAluno.aluno.primeiro_nome}"
+												class="validate" pt:type="text"></h:inputText>
+											<label for="first_name" data-error="Digite seu nome"
+												data-success="ok">Primeiro Nome</label>
+										</div>
+										<div class="input-field col s6">
+											<h:inputText id="last_name"
+												value="#{beanEditarAluno.aluno.ultimo_nome}"
+												class="validate" pt:type="text" />
+											<label for="last_name" data-error="Digite seu ultimo nome"
+												data-success="ok">Ultimo Nome</label>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="input-field col s6">
+											<h:inputText id="cpf" value="#{beanEditarAluno.aluno.cpf}"
+												class="validate" pt:type="text" />
+											<label for="cpf" data-error="Digite seu cpf"
+												data-success="ok">CPF</label>
+										</div>
+										<div class="input-field col s6">
+											<h:inputText id="tel"
+												value="#{beanEditarAluno.aluno.telefone}" class="validate"
+												pt:type="text" />
+											<label for="tel" data-error="Digite seu telefone"
+												data-success="ok">Telefone</label>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="input-field col s6">
+											<h:inputText id="data"
+												value="#{beanEditarAluno.aluno.data_nascimento}"
+												class="validate" pt:type="text" />
+											<label for="data" data-error="Digite seu cpf"
+												data-success="ok"></label>
+										</div>
+													<h:inputHidden value="#{beanEditarAluno.aluno.id_pessoa}" />
+													<h:inputHidden value="#{beanEditarAluno.pessoa.id_pessoa}" />
+										<div class="input-field col s6">
+
+											<h:panelGroup
+												rendered="#{beanEditarAluno.aluno.sexo.equals('M')}">
+												<h:selectOneMenu value="#{beanEditarAluno.aluno.sexo}">
+													<f:selectItem itemValue="m" itemLabel="Masculino" />
+													<f:selectItem itemValue="f" itemLabel="Feminino" />
+													<f:selectItem itemValue="o" itemLabel="Outro" />
+												</h:selectOneMenu>
+											</h:panelGroup>
+											<h:panelGroup
+												rendered="#{beanEditarAluno.aluno.sexo.equals('F')}">
+												<h:selectOneMenu value="#{beanEditarAluno.aluno.sexo}">
+													<f:selectItem itemValue="f" itemLabel="Feminino" />
+													<f:selectItem itemValue="m" itemLabel="Masculino" />
+													<f:selectItem itemValue="o" itemLabel="Outro" />
+												</h:selectOneMenu>
+											</h:panelGroup>
+											<h:panelGroup
+												rendered="#{beanEditarAluno.aluno.sexo.equals('O')}">
+												<h:selectOneMenu value="#{beanEditarAluno.aluno.sexo}">
+													<f:selectItem itemValue="o" itemLabel="Outro" />
+													<f:selectItem itemValue="m" itemLabel="Masculino" />
+													<f:selectItem itemValue="f" itemLabel="Feminino" />
+												</h:selectOneMenu>
+											</h:panelGroup>
+										</div>
+									</div>
+									<span class="card-title">Dados do Aluno</span>
+									<div class="row">
+										<div class="input-field col s6">
+											<h:inputText id="forEgre" disabled="true" 
+												value="#{beanEditarAluno.aluno.form_egresso}"
+												class="validate" pt:type="text" />
+											<label for="forEgre" data-error="Qual a formado egresso"
+												data-success="ok">Forma de Egreso</label>
+										</div>
+										<div class="input-field col s6">
+											<h:inputText id="mat"
+												value="#{beanEditarAluno.aluno.matricula}" disabled="true"
+												pt:type="text" />
+											<label>Matricula</label>
+										</div>
+									</div>
+									<div class="row">
+
+										<div class="input-field col s6">
+											<h:inputText id="cu"
+												value="#{beanEditarAluno.aluno.curso.nome_curso}"
+												disabled="true" pt:type="text" />
+											<label>Curso</label>
+										</div>
+										<div class="input-field col s3">
+											<h:inputText id="cuF"
+												value="#{beanEditarAluno.aluno.curso.formacao_curso}"
+												disabled="true" pt:type="text" />
+											<label>Formação</label>
+										</div>
+										<div class="input-field col s3">
+											<h:inputText id="sit"
+												value="#{beanEditarAluno.aluno.situcao}" disabled="true"
+												pt:type="text" />
+											<label>Situação</label>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="input-field col s6">
+											<h:inputText id="un"
+												value="#{beanEditarAluno.aluno.curso.cidade.nome_cidade}"
+												disabled="true" pt:type="text" />
+											<label>Unidade</label>
+										</div>
+										<div class="input-field col s6">
+											<h:inputText id="es"
+												value="#{beanEditarAluno.aluno.curso.cidade.estado.sigla}"
+												disabled="true" pt:type="text" />
+											<label>Estado</label>
+										</div>
+									</div>
+									<!-- <div class="row">
+										<h:inputText placeholder="Placeholder" id="email"
+											class="validate" requiredMessage="Digite um email valido">
+											<input type="email" />
+											<label for="first_name" data-error="Digite um email válido"
+												data-success="ok">Email</label>
+											<f:validateRegex
+												pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+											<h:message for="email" />
+										</h:inputText>
+
+									</div> -->
+
+								</div>
+							</div>
+							<div class="card-action">
+								<div class="row">
+									<h:commandButton action="#{beanEditarAluno.frmEditPageAluno( beanEditarAluno.aluno)}"
+										value="Editar" class="btn right" />
+								</div>
+							</div>
+						</div>
+					</h:form>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</h:body>
+
+</html>

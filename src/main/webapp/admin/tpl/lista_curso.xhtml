@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+		   <script>
+
+					function  mostrarMensagem() {
+					
+						swal({
+							  title: "Você tem certeza?",
+							  text: "Após excluido não terá mais como restaurar os dados!",
+							  type: "warning",
+							  showCancelButton: true,
+							  confirmButtonClass: "btn-danger",
+							  confirmButtonText: "Sim, delete!",
+							  cancelButtonText: "Não, cancela!",
+							  closeOnConfirm: false,
+							  closeOnCancel: false
+							},
+							function(isConfirm) {
+							  if (isConfirm) {
+								
+							    swal("Deletado!", "Os dados foram deletado com sucesso.", "success");
+							    
+							   return true;
+							    
+							  } else {
+							    swal("Cancelado", "Os dados continuam em nossa base de dados :)", "error");
+							    return false;
+							  }
+
+							  
+							});
+						return false;
+					
+					}
+				
+					
+					</script>
+<h:body>
+	<div class="row" style="margin: 10px">
+
+
+
+<!-- ##BEGIN FORMULARIO DE PESQUISA  -->
+			<div class="nav-wrapper white">
+				<h:form style="margin-top: 20px; margin-bottom: 20px"  name="excluir-registro">
+					<div class="input-field">
+					<div class="row">
+						<h:inputText value="#{beanEditarCurso.str_pesq}"   />
+						<label>Pesquise pelo nome do cusro</label> 
+					</div>
+					<h:commandButton action="#{beanEditarCurso.showPesquisa(beanEditarCurso.str_pesq)}"  value="OK" class="btn green right" />
+					&nbsp;&nbsp;&nbsp;
+					<h:commandButton  action="#{beanEditarCurso.limpaPesquisa()}" rendered="#{beanEditarCurso.pesquisar_flag}" value="Limpar" class="btn red right" />
+				</div>
+				</h:form>
+			</div>
+			<br /><br /><br />
+<!-- ##END FORMULARIO DE PESQUISA  -->
+<!--  #BEGIN TABLE FORM SEARCH -->
+		<h:panelGroup rendered="#{beanEditarCurso.pesquisar_flag}">
+		<div class="car">
+		  <h2 class="flow-text center">Foram encotrado(s)[ #{beanEditarCurso.myFormPes.size()} ]</h2>
+			<h:dataTable id="items" value="#{beanEditarCurso.myFormPes}" var="c" class="bordered highlight" rendered="#{beanEditarCurso.myFormPes.size() > 0}">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Foto" />
+					</f:facet>
+					 <img src="#{c.url_image}"  width="70" height="70"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+					<h:outputText value="#{c.nome_curso}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Sigla" />
+					</f:facet>
+					<h:outputText value="#{c.sigla_curso}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Formação" />
+					</f:facet>
+					<h:outputText value="#{c.formacao_curso}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Fases" />
+					</f:facet>
+					<h:outputText value="#{c.fase_curso}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Cidade Estado" />
+					</f:facet>
+					<h:outputText value="#{c.cidade.nome_cidade} - #{c.cidade.estado.nome}" />
+				
+				      <!-- cidade estado -->
+				      <h:inputHidden value="#{c.cidade.id_cidade}" />
+				      <h:inputHidden value="#{c.cidade.estado.id_estado}" />
+				      
+				      
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Opções" />
+					</f:facet>
+					 <div class="row">
+					
+							
+					               <h:form class="right" name="excluir-registro">
+					                <h:commandButton action="#{beanEditarCurso.redirectEdicao(c)}" value="Editar"  class="btn green" />&nbsp;&nbsp;
+					                <h:commandButton action="#{beanEditarCurso.deletar(c)}"  value="Excluir"    class="btn red"  />
+					                
+					               </h:form>
+						
+							
+					       </div>
+					 </h:column>
+			</h:dataTable>
+		</div>
+	<!-- ##END TBALE FORM SEARCH -->	
+		 <p class="flow-text">Outros</p>
+		<hr /><br />
+		</h:panelGroup>
+
+                        <div class="row">
+							<!--  ###BEGIN RECADOS  -->
+								<h:panelGroup rendered="#{beanEditarCurso.msg_erro.length() > 0}">
+									<div class="row">
+										<div class="card #{beanEditarCurso.colorMenssage}" style="padding: 5px">
+										<div class="row" >
+										     <i class="material-icons right">error_outline</i>
+											 <p class="flow-text" style="padding-left: 10px">#{beanEditarCurso.msg_erro}</p>
+											
+										  </div>
+										</div>
+									</div>
+								</h:panelGroup>
+								</div>
+							<!--  ###END RECADOS  -->
+
+			<ul class="collapsible" data-collapsible="accordion" >
+					<ui:repeat value="#{beanEditarCurso.listaCurso()}" var="c">
+                    <li><h:outputText value="#{item.name}"/></li>
+                    <li>
+      					<div class="collapsible-header"><i class="material-icons">label_outline</i>
+      					<div class="row">
+      					<span class="flow-text" style="   font-family: Condensed light, GillSans, Calibri, Trebuchet, sans-serif"> #{c.nome_curso}</span> 
+      					<br />
+      					 <span class="gray-text right">   #{c.cidade.nome_cidade} - #{c.cidade.estado.nome}  <i class="material-icons right">location_on</i></span>
+      					</div>
+      					</div>
+      					 <div class="collapsible-body ">
+      					    <div class="row">
+      					       <div class="col s12 m12">
+					          <div class="card">
+					            <div class="card-image">
+					              <img src="#{c.url_image}" />
+					              <span class="card-title">#{c.sigla_curso}</span>
+					            </div>
+					            <div class="card-content">
+					              <p class="flow-text">Unidade: #{c.cidade.nome_cidade} - #{c.cidade.estado.nome}</p>
+					              <p class="flow-text">Formação: #{c.formacao_curso}  </p>
+					              <p class="flow-text">Fases #{c.fase_curso}</p>
+					              <hr />
+					             
+					              <blockquote>
+					            
+					              #{c.texto_livre}
+					              </blockquote>
+					               <hr />
+					               <div class="row">
+					             
+						               <h:form class="right" name="frm_list">
+						                 <h:commandButton action="#{beanEditarCurso.redirectEdicao(c)}" value="Editar"  class="btn green" />&nbsp;&nbsp;
+						                 <h:commandButton  action="#{beanEditarCurso.deletar(c)}"   onclick=" mostrarMensagem()"  value="Excluir"  class="btn red" />
+						           
+						               </h:form>
+						               
+						        
+					              </div>
+					            </div>
+					           
+					          </div>
+					        </div>
+      					    </div>
+      					 </div>
+    				</li>
+				</ui:repeat>
+			</ul>
+			
+	            
+		
+		</div>
+	
+</h:body>
+</html>

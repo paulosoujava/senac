@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+	<div class="row">
+		<div class="col s12 m12">
+
+			<div class="card  darken-1">
+
+				<div class="card-content black-text">
+					<span class="card-title">Cadastro Aluno ao Egresso do curso<br />
+						<b> #{beanCadastroAluno.curso.nome_curso} :: Unidade
+							#{beanCadastroAluno.curso.cidade.nome_cidade} -
+							#{beanCadastroAluno.curso.cidade.estado.sigla} </b></span>
+					<div class="row">
+						<!--  ###BEGIN RECADOS  -->
+						<h:panelGroup rendered="#{beanCadastroAluno.msg_erro.length() > 0}">
+							<div class="row">
+								<div class="card #{beanCadastroAluno.msg_color}"
+									style="padding: 5px">
+									<div class="row">
+										<i class="material-icons right">#{beanCadastroAluno.msg_icon}</i>
+										<p class="flow-text">#{beanCadastroAluno.msg_erro}</p>
+
+									</div>
+								</div>
+							</div>
+						</h:panelGroup>
+						<!--  ###END RECADOS  -->
+<br /><br /><br />
+
+						<!--###BEGIN  FORM CADASTRO DE DADOS PESSOAIS  -->
+						<h:form class="col s12">
+							<div class="row">
+<span class="card-title">Dados Pessoais </span>
+								<div class="input-field col s6">
+									<h:inputText value="#{beanCadastroAluno.aluno.primeiro_nome}"
+										required="true" requiredMessage="Digite o nome do curso"
+										id="nomecurso" class="validate">
+										<f:validateLength for="nomecurso" minimum="1" />
+									</h:inputText>
+									<h:message for="nomecurso" style="color:red; " />
+									<label for="nomecurso" class="active">Primeiro Nome</label>
+								</div>
+								<div class="input-field col s6">
+									<h:inputText value="#{beanCadastroAluno.aluno.ultimo_nome}"
+										required="true" requiredMessage="Digite ultimo nome"
+										id="siglacurso" class="validate">
+										<f:validateLength for="nomeUltimo" minimum="1" />
+									</h:inputText>
+									<h:message for="nomeUltimo" style="color:red; " />
+									<label for="nomeUltimo" class="active">Ultimo Nome</label>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s6">
+									<h:inputText value="#{beanCadastroAluno.aluno.telefone}"
+										required="true" requiredMessage="Digite um telefone" id="tel"
+										class="validate">
+										<f:validateLength for="tel" minimum="1" />
+									</h:inputText>
+									<h:message for="tel" style="color:red; " />
+									<label for="tel" class="active">Telefone</label>
+								</div>
+								<div class="input-field col s6">
+									<h:inputText value="#{beanCadastroAluno.aluno.sexo}" id="Sexo"
+										required="true" requiredMessage="Digite p sexo"
+										class="validate">
+									</h:inputText>
+									<h:message showDetail="Sexo" showSummary="true" for="fase"
+										style="color:red; " />
+									<label for="Sexo" class="active">Sexo</label>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s6">
+									<h:inputText value="#{beanCadastroAluno.aluno.cpf}"
+										required="true" requiredMessage="Qual cpf" id="cpf"
+										class="validate">
+										<f:validateLength for="cpf" minimum="1" />
+									</h:inputText>
+									<h:message for="cpf" style="color:red; " />
+									<label for="cpf" class="active">Cpf</label>
+								</div>
+								<div class="input-field col s6">
+									<h:inputText value="#{beanCadastroAluno.aluno.data_nascimento}"
+										required="true" requiredMessage="Qual a data de nascimento"
+										id="dtaNasc" class="validate">
+										<f:validateLength for="dtNasc" minimum="1" />
+									</h:inputText>
+									<h:message for="dtNasc" style="color:red; " />
+									<label for="dtNasc" class="active">Data de Nascimento</label>
+								</div>
+							</div>
+
+
+
+						
+
+
+						<!-- ###END FORM CADASTRO DE DADOS alunoIS -->
+
+						<!-- ###BEGIN FORM CADASTRO DE DADOS ALUNO -->
+						
+							<div class="row">
+								<span class="card-title">Dados Aluno </span>
+								<div class="input-field col s6">
+									<h:inputText value="#{beanCadastroAluno.aluno.matricula}"
+										required="true" requiredMessage="Matricula" id="mat"
+										class="validate">
+										<f:validateLength for="mat" minimum="1" />
+									</h:inputText>
+									<h:message for="mat" style="color:red; " />
+									<label for="mat" class="active">Matricula </label>
+								</div>
+								<div class="input-field col s6">
+									<h:inputText value="#{beanCadastroAluno.aluno.form_egresso}"
+										required="true" requiredMessage="Forma de egresso" id="eg"
+										class="validate">
+										<f:validateLength for="eg" minimum="1" />
+									</h:inputText>
+									<h:message for="eg" style="color:red; " />
+									<label for="eg" class="active">Forma de Egresso</label>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s6">
+									<h:inputText value="#{beanCadastroAluno.aluno.situcao}"
+										required="true" requiredMessage="Qual a situação do aluno"
+										id="sit" class="validate">
+										<f:validateLength for="sit" minimum="1" />
+									</h:inputText>
+									<h:message for="sit" style="color:red; " />
+									<label for="sit" class="active">Situação</label>
+								</div>
+								<div class="input-field col s6">
+									<h:inputText value="#{beanCadastroAluno.email}"
+										required="true" requiredMessage="Qual a o email do aluno"
+										id="email" class="validate">
+										<f:validateLength for="email" minimum="1" />
+									</h:inputText>
+									<h:message for="email" style="color:red; " />
+									<label for="email" class="active">Situação</label>
+								</div>
+							</div>
+							<div class="card-action">
+								<div class="row">
+									<h:commandButton class="btn right"
+										action="#{beanCadastroAluno.cadastro(beanCadastroAluno.aluno)}"
+										value="Cadastrar">
+
+									</h:commandButton>
+
+
+
+								</div>
+							</div>
+
+
+
+						</h:form>
+
+
+
+						<!-- ###END FORM CADASTRO DE DADOS ALUNO -->
+					</div>
+					<h:form>
+						<h:commandButton class="btn blue"
+							action="#{beanCadastroAluno.back()}" value="Voltar">
+
+						</h:commandButton>
+					</h:form>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</h:body>
+</html>

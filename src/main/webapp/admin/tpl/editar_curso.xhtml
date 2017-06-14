@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+	<div class="row">
+		<div class="col s12 m12">
+
+			<div class="card  darken-1">
+
+				<div class="card-content black-text">
+					<span class="card-title">Editar Curso</span>
+					<!--###BEGIN  FORM CADASTRO DE CURSO -->
+					<h:form>
+						<div class="row">
+							<!--  ###BEGIN RECADOS  -->
+							<h:panelGroup rendered="#{beanEditarCurso.msg_erro.length() > 0}">
+								<div class="row">
+									<div class="card #{beanEditarCurso.colorMenssage}"
+										style="padding: 5px">
+										<div class="row">
+											<i class="material-icons right">error_outline</i>
+											<p class="flow-text">#{beanEditarCurso.msg_erro}</p>
+
+										</div>
+									</div>
+								</div>
+							</h:panelGroup>
+							<!--  ###END RECADOS  -->
+
+							<div class="input-field col s12">
+
+								<label for="nomecurso" class="active">Qual o Estado.</label>
+								<h:selectOneMenu value="#{beanEditarCurso.id_estado}"
+									valueChangeListener="#{beanEditarCurso.ShowCidades}"
+									onchange="submit()">
+									<f:selectItems value="#{beanEditarCurso.getEstados()}" var="r"
+										itemValue="#{r.id_estado}" itemLabel="#{r.nome}" />
+								</h:selectOneMenu>
+
+								<br />
+								<br />
+
+							</div>
+
+
+							<div class="row">
+
+								<div class="input-field col s12">
+									<label for="nomecurso" class="active">Qual a Cidade.</label>
+									<h:selectOneMenu value="#{beanEditarCurso.id_cidade}"
+										required="true" id="selectCidade">
+										<f:selectItems value="#{beanEditarCurso.listCidades}" var="r"
+											itemValue="#{r.id_cidade}" itemLabel="#{r.nome_cidade}" />
+										<f:validateLength for="selectCidade" minimum="1" />
+									</h:selectOneMenu>
+
+								</div>
+
+
+								<div class="input-field col s6">
+									<h:inputText value="#{beanEditarCurso.curso.nome_curso}"
+										required="true" requiredMessage="Digite o nome do curso"
+										id="nomecurso" class="validate">
+										<f:validateLength for="nomecurso" minimum="1" />
+									</h:inputText>
+									<h:message for="nomecurso" style="color:red; " />
+									<label for="nomecurso" class="active">Nome do Curso</label>
+								</div>
+								<div class="input-field col s6">
+									<h:inputText value="#{beanEditarCurso.curso.sigla_curso}"
+										required="true" requiredMessage="Digite a sigla do curso"
+										id="siglacurso" class="validate">
+										<f:validateLength for="siglacurso" minimum="1" />
+									</h:inputText>
+									<h:message for="siglacurso" style="color:red; " />
+									<label for="siglacurso" class="active">Sigla do Curso</label>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s6">
+									<h:inputText value="#{beanEditarCurso.curso.formacao_curso}"
+										required="true" requiredMessage="Qual a formação deste curso"
+										id="formacao" class="validate">
+										<f:validateLength for="formacao" minimum="1" />
+									</h:inputText>
+									<h:message for="formacao" style="color:red; " />
+									<label for="formacao" class="active">Formação dada pelo
+										Curso</label>
+								</div>
+								<div class="input-field col s6">
+									<h:inputText value="#{beanEditarCurso.curso.fase_curso}"
+										id="fase" required="true"
+										requiredMessage="Quantas fases tem este curso. * Somente números"
+										class="validate">
+										<f:validateDoubleRange for="fase" minimum="1" maximum="20" />
+									</h:inputText>
+									<h:message showDetail="false" showSummary="true" for="fase"
+										style="color:red; " />
+									<label for="fase" class="active">Quantas fases tem este
+										Curso</label>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s6	">
+									<h:inputText value="#{beanEditarCurso.curso.url_image}"
+										id="image" required="true"
+										requiredMessage="Cole ula url aqui ex>: http://www.site.com/imagem/teste.png"
+										class="validate">
+										<f:validateLength for="image" minimum="1" />
+									</h:inputText>
+									<h:message for="image" style="color:red; " />
+									<label for="image" class="active">Cole aqui q URL da
+										imagem de difulgação</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<h:inputTextarea value="#{beanEditarCurso.curso.texto_livre}"
+										required="true" requiredMessage="Descreva o curso"
+										id="textarea1" class="materialize-textarea">
+										<f:validateLength for="textarea1" minimum="1" />
+									</h:inputTextarea>
+									<h:message for="textarea1" style="color:red; " />
+									<label for="textarea1">Texto Livre</label>
+								</div>
+							</div>
+							<div class="card-action">
+								<div class="row">
+									<h:commandButton class="btn green"
+										action="#{beanEditarCurso.editarDados(beanEditarCurso.curso)}"
+										value="Editar">
+									</h:commandButton>
+									&nbsp;&nbsp;&nbsp;
+									<h:commandButton class="btn teal"
+										action="#{beanEditarCurso.voltar}" value="Voltar">
+									</h:commandButton>
+								</div>
+							</div>
+						</div>
+					</h:form>
+					<!-- ###END FORM CADASTRO DE CURSO -->
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</h:body>
+</html>

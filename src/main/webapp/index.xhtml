@@ -1,0 +1,123 @@
+	<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Cadastro de Pessoas</title>
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet" />
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet"
+		href="resources/materialize/css/materialize.css"
+		media="screen,projection" />
+	<!-- 	
+			<link type="text/css" rel="stylesheet"
+		href="resources/materialize/css/sweetalert.css" />
+			<script type="text/javascript"
+		src="resources/materialize/js/sweetalert.js"></script> -->
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</h:head>
+<h:body>
+<!-- ###BEGIN  NAV BAR MENU TOP -->
+	<div class="navbar-fixed">
+		<nav>
+			
+				<a href="#!" class="brand-logo" style="padding-left: 10px">Logo</a>
+				
+				<!--###BEGIN FORM LOGIN -->
+				<!--  
+				    inicializa objeto login
+				    submente para validacoes server client side apos validacoes do javascript local client side
+				    e verifica vericidade no banco de dados.
+				    Retornos: 
+				    
+				     index. == view correspondente deve ser reexibida  escopo preservado
+				    
+				     /aluno  -> FORWARD  -> redirecionamento -> atualizacao URL -Redirect=true
+				     
+				     /adm  -> FORWARD -> redirecionamento -> atualizacao URL -Redirect=true
+				 -->
+				<h:form id="loginFrm"  style="border:1px solid red"> 
+				<ul class="right hide-on-med-and-down">
+					<li style="padding: 10px; margin-left: 20px">
+
+
+						<div class="input-field col s12 black-text">
+							<h:inputText value="#{beanLogin.login.email}"   style="border: 1px solid white; background: white; height: 40px;" />
+						</div>
+						
+					</li>
+
+					<li style="padding: 10px; margin-left: 20px">
+						<div class="input-field col s12  black-text">
+							<h:inputSecret value="#{beanLogin.login.senha}"   
+								style="border: 1px solid white; background: white; height: 40px" />
+						</div>
+					</li>
+					<li style="padding: 10px; margin-left: 20px">
+						<div class="input-field col s12">
+						   <h:commandButton action="#{beanLogin.checkDataLogin(beanLogin.login)}"  value="Logar" 
+						   class="btn btn-block" style="height: 40px"/>
+						</div>
+                    </li>
+                  </ul>
+				</h:form>
+				<!-- ###END FORM LOGIN -->
+				
+			  <div class="row">
+				        <div class="col s12 m4">
+				        <ui:repeat value="#{beanImporte.egressoLis}"  var="cu" >
+				         <div class="card black-test hoverable">
+				            <div class="card-image center align-center">
+				             <h1 class="black-text">#{cu.curso.sigla_curso}</h1>
+				              
+				            </div>
+				         
+				            <div class="card-action  black-text">
+				            <div class="row">
+				              <a href="listaAlunos.xhtml" class="right btn">Ver</a>
+				              </div>
+				            </div>
+				          </div>
+				        
+				        </ui:repeat>
+				         
+				        </div>
+      </div>
+
+		</nav>
+	</div>
+<!-- ###END NAV BAR MENU TOP -->	
+	
+		 
+
+	<!--###BEGIN  MENSAGEM DE ERRO  -->
+	 <h:panelGroup  rendered="#{beanLogin.msg_erro.length() > 0 }" >
+	<div class=" right" style="margin-top: -10px;  margin-bottom: 30px">
+		
+			<div class="card-panel teal lighten-2"  style="border-left:2px solid blue; border-bottom: 2px solid blue;"> 
+        		<i class="material-icons sm pulse">error_outline</i> 
+        		
+        		#{beanLogin.msg_erro}
+ 			 </div>
+		 
+	</div>
+	</h:panelGroup>
+	<!--###END  MENSAGEM DE ERRO  -->
+	
+
+	
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript"
+		src="resources/materialize/js/materialize.js"></script>
+	
+	<script type="text/javascript" src="resources/materialize/js/init.js"></script>
+</h:body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+
+
+		
+		
+<!-- PAGINA DE IMPORTE -->		
+		<div class="container" style="margin-bottom: 5px">
+			<h:form enctype="multipart/form-data">
+			
+			<!-- FORMULARIO IMPORTACAO PLANILHA -->
+			<div class="row">
+		        <div class="col s12 m12 ">
+		       
+		        
+		          <div class="card  black-text">
+		            <div class="card-content black-text  z-depth-5">
+		    
+		              <span class="card-title">Planilha Importação  </span>
+		              <h:panelGroup rendered="#{beanImporte.msg_erro.length() > 0 }">
+		              <p class=" #{beanImporte.msg_color}-text"><i class="material-icons">#{beanImporte.msg_icon}</i>  #{beanImporte.msg_erro}</p>
+		              </h:panelGroup>
+		             
+						<div class="file-field input-field black-text">
+			  	  		   <div class="btn">
+			    		    <span>Arquivo</span>
+								<h:inputFile id="fileUploader" value="#{beanImporte.arquivo}" required="true"  requiredMessage="** Por favor envie o arquivo. "/>
+							</div>
+							 <div class="file-path-wrapper">
+			        		  <input class="file-path validate" type="text" />
+			     			 </div>
+						  </div>
+						  <!-- OPTIONS  -->
+						  <!-- OPTIONS CURSO -->
+						   <div class="input-field col s12 black-text" style="margin-left: 2px; margin-top: -20px">
+						     <!-- OPTIONS CURSO -->
+							   <div class="row col s8  ">
+									    <h:selectOneMenu  value="#{beanImporte.idDocurso}"    class="black-text"
+									     required="true" requiredMessage="**Por favor, diga-nos a qual curso pertence este importe.">
+									    <f:selectItem  itemValue="" itemLabel="Selecione o Curso" noSelectionOption="true" />
+									    
+									   <f:selectItems value="#{beanImporte.listaCurso}" var="c" converter="generic" 
+											itemValue="#{c.id_curso}" itemLabel="#{c.nome_curso} Unidade: #{c.cidade.nome_cidade}" />
+									    </h:selectOneMenu>
+									      
+									      
+							     </div> 
+							     <!--  ANO -->
+							     <div class="row col s2">
+							     <h:selectOneMenu  value="#{beanImporte.ano}"   class="black-text" required="true" requiredMessage="**Por favor, diga-nos a qual ano pertence este egresso">
+									    <f:selectItem   itemLabel="Ano" noSelectionOption="true" />
+									    <f:selectItems value="#{beanImporte.anoValue}"  />
+								 </h:selectOneMenu>
+         						</div>
+							
+								
+					
+							      <!--  FASE -->
+							     <div class="row col s2">
+							     <h:selectOneMenu  value="#{beanImporte.fase}"   class="black-text" required="true" requiredMessage="**Por favor, diga-nos a qual fase pertence este egresso">
+									    <f:selectItem   itemLabel="Fase" itemValue="0"/>
+									    <f:selectItem   itemLabel="1" itemValue="1" />
+									    <f:selectItem   itemLabel="2" itemValue="2" />
+									    <f:selectItem   itemLabel="3" itemValue="3" />
+									    <f:selectItem   itemLabel="4" itemValue="4" />
+									    <f:selectItem   itemLabel="5" itemValue="5" />
+									    <f:selectItem   itemLabel="6" itemValue="6" />
+									    <f:selectItem   itemLabel="7" itemValue="7" />
+									    <f:selectItem   itemLabel="8" itemValue="8" />
+									    <f:selectItem   itemLabel="9" itemValue="9" />
+									    <f:selectItem   itemLabel="10" itemValue="10" />
+								 </h:selectOneMenu>
+								  </div>
+							</div>
+					 <hr />
+		            
+		                  <div class="row">
+		                  <h:messages id="mensagens"  class="accent-1 z-depth-5 " style="border-bottom: 1px solid blue; border-top: 1px solid blue; padding:10px"/>
+		         		      
+		         		       <h:commandButton action="#{beanImporte.importe()}" class="btn  red right" value="Importar">
+		          			   </h:commandButton>
+		          			   
+		          	      </div>
+		           </div>
+		          </div>
+		        </div>
+		      </div>
+		   <!-- ## FORMULARIO IMPORTACAO PLANILHA -->
+			</h:form>
+		
+		</div>
+
+			 <!-- LISTA DO BANCO DE DADOS  -->
+	         <h:panelGroup rendered="#{beanImporte.egressoLis.size() > 0}">
+	             <ui:include src="/admin/tpl/lista_egresso.xhtml" />
+		 </h:panelGroup> 	
+
+		 
+
+	
+
+</h:body>
+</html>

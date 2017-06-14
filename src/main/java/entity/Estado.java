@@ -1,0 +1,93 @@
+package entity;
+
+import java.util.Set;
+import java.util.TreeSet;
+
+/*
+ * Model estado
+ */
+public class Estado implements Comparable<Estado> {
+
+	private String sigla;
+	private String nome;
+	private Integer id_estado;
+	private Set<Cidade> cidade = new TreeSet<>();
+	
+	
+	public Estado(){}
+	
+	
+	public Estado(String sigla, String nome) {
+		this.sigla = sigla;
+		this.nome = nome;
+	}
+
+	public String getSigla() {
+		return sigla;
+	}
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	
+		
+
+
+
+	public Set<Cidade> getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Set<Cidade> cidade) {
+		this.cidade = cidade;
+	}
+
+	public Integer getId_estado() {
+		return id_estado;
+	}
+
+	public void setId_estado(Integer id_estado) {
+		this.id_estado = id_estado;
+	}
+
+	@Override
+	public int compareTo(Estado o) {
+		return this.nome.compareTo(o.nome);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Estado other = (Estado) obj;
+		if (sigla == null) {
+			if (other.sigla != null)
+				return false;
+		} else if (!sigla.equals(other.sigla))
+			return false;
+		return true;
+	}
+
+}
