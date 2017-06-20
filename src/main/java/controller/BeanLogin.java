@@ -34,9 +34,9 @@ public class BeanLogin implements Serializable {
 
    //sair
 	public String sair(){
-		this.msg_erro = "";
+		this.msg_erro = new String();
 		this.login = new Login();
-		return "index?faces-redirect=true";
+		return "../index.xhtml?faces-redirect=true";
 	}
 	
 	//************************************************************

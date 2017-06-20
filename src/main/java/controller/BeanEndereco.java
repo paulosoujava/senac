@@ -39,56 +39,14 @@ public class BeanEndereco implements Serializable {
 	private List<Cidade> lCidade = new ArrayList<>();
 	private Estado estado = new Estado();
 	private List<Estado>  lEstado = new ArrayList<>();
-	private Cidade cidade = new Cidade();
-
+	private Cidade cidade = new Cidade();	
+	private EnderecoDAO eD = new EnderecoDAO();
 	
-	//seta o endereco no objeto caso exista
+	
+	
+	
 	public BeanEndereco() {
-		EnderecoDAO eD = new EnderecoDAO();
-		Endereco e = new Endereco();
-		
-		e = eD.CheckIdPessoaEndereco((Integer) SessionUtil.getParam("IDALUNO"));
-		if( e != null ){
-			
-			//DIZ QUE É PRA ATUALIZAR O ENDERECO = TRUE
-			this.is_edit = true;
-			
-			
-			this.idCidade = e.getCidade().getId_cidade();
-			this.idEstado = e.getCidade().getEstado().getId_estado();
-			this.endereco = e;
-			
-			
-			
-			//pegando CIdade e estado cadastrado no endereco
-			//CIDAE E ESTADO DO USUARIO
-			CidadeDAO ciD = new CidadeDAO();
-			cidade = ciD.readCidadeById(this.idCidade);
-			EstadoDAO esD = new EstadoDAO();
-			estado = esD.readEstadoById(cidade.getEstado().getId_estado());
-			
-			//LISTA DE ESTADO E CIDADE DO BANCO
-			
-			 //tirando a cidade da lista para nao haver duplicidade
-			 this.lEstado = esD.readEstado();
-			 this.lCidade = ciD.readCidade();
-			 
-//			 //SETANDO O ESADO DO USUARIO PARA PRIMEIRO
-//			  if( lEstado.contains(estado.getNome()) ){
-//				  lEstado.remove(estado.getNome());
-//			  }
-//			   //seto para primeiro para aparecer no arrayList do combo
-//			  lEstado.add(0,estado);
-			  
-			  //SETANDO A CIDADE PARA PRIMEIRO A SER EXIBIDA
-			  if( lCidade.contains(cidade.getNome_cidade()) ){
-				  lCidade.remove(cidade.getNome_cidade());
-			  }
-			   //seto para primeiro para aparecer no arrayList do combo
-			  lCidade.add(0,cidade);
-			 
 	
-		}
 	}
 
 	// EDITAR ALUNO PAGE /ALUNO/ENDERECO
@@ -121,6 +79,7 @@ public class BeanEndereco implements Serializable {
 	// GET AND SET
 
 	public Endereco getEndereco() {
+	
 		return endereco;
 	}
 
@@ -156,9 +115,7 @@ public class BeanEndereco implements Serializable {
 		this.idCidade = idCidade;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 
 	public static String getInf() {
 		return INF;
@@ -185,6 +142,27 @@ public class BeanEndereco implements Serializable {
 	}
 
 	public Boolean getIs_edit() {
+		
+		this.endereco = eD.CheckIdPessoaEndereco((Integer) SessionUtil.getParam("IDALUNO"));
+		
+		if( this.endereco != null ){
+			this.is_edit = true;
+			
+			this.idEstado = endereco.getCidade().getEstado().getId_estado();
+			EstadoDAO esD = new EstadoDAO();
+			lEstado = esD.readEstado();
+		
+			 
+			  if( lEstado.contains(this.endereco.getCidade().getEstado()) ){
+				  lEstado.remove(this.endereco.getCidade().getEstado());
+			  }
+			  //seto para primeiro para aparecer no arrayList do combo
+			  lEstado.add(0, this.endereco.getCidade().getEstado());
+			
+			  CidadeDAO cidD = new CidadeDAO();
+			  lCidade  = cidD.readCidadeByEstado(endereco.getCidade().getEstado());
+			
+		}
 		return is_edit;
 	}
 
@@ -203,6 +181,10 @@ public class BeanEndereco implements Serializable {
 	public Cidade getCidade() {
 		return cidade;
 	}
+
+	
+
+	
 	
 
 }

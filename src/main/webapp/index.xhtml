@@ -1,11 +1,12 @@
-	<html xmlns="http://www.w3.org/1999/xhtml"
+
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 	<meta charset="UTF-8" />
-	<title>Cadastro de Pessoas</title>
+	<title>Egresso</title>
 	<!--Import Google Icon Font-->
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet" />
@@ -24,100 +25,98 @@
 
 </h:head>
 <h:body>
-<!-- ###BEGIN  NAV BAR MENU TOP -->
+	<!-- ###BEGIN  NAV BAR MENU TOP -->
 	<div class="navbar-fixed">
-		<nav>
-			
-				<a href="#!" class="brand-logo" style="padding-left: 10px">Logo</a>
-				
-				<!--###BEGIN FORM LOGIN -->
-				<!--  
-				    inicializa objeto login
-				    submente para validacoes server client side apos validacoes do javascript local client side
-				    e verifica vericidade no banco de dados.
-				    Retornos: 
-				    
-				     index. == view correspondente deve ser reexibida  escopo preservado
-				    
-				     /aluno  -> FORWARD  -> redirecionamento -> atualizacao URL -Redirect=true
-				     
-				     /adm  -> FORWARD -> redirecionamento -> atualizacao URL -Redirect=true
-				 -->
-				<h:form id="loginFrm"  style="border:1px solid red"> 
+		<nav class="blue" >
+
+			<a href="#!" class="brand-logo" style="padding-left: 10px">Egresso</a>
+
+			<!--###BEGIN FORM LOGIN -->
+
+			<h:form id="loginFrm">
 				<ul class="right hide-on-med-and-down">
 					<li style="padding: 10px; margin-left: 20px">
 
 
 						<div class="input-field col s12 black-text">
-							<h:inputText value="#{beanLogin.login.email}"   style="border: 1px solid white; background: white; height: 40px;" />
+							<h:inputText value="#{beanLogin.login.email}"
+								style="border: 1px solid white; background: white; height: 40px;" />
 						</div>
-						
+
 					</li>
 
 					<li style="padding: 10px; margin-left: 20px">
 						<div class="input-field col s12  black-text">
-							<h:inputSecret value="#{beanLogin.login.senha}"   
+							<h:inputSecret value="#{beanLogin.login.senha}"
 								style="border: 1px solid white; background: white; height: 40px" />
 						</div>
 					</li>
 					<li style="padding: 10px; margin-left: 20px">
 						<div class="input-field col s12">
-						   <h:commandButton action="#{beanLogin.checkDataLogin(beanLogin.login)}"  value="Logar" 
-						   class="btn btn-block" style="height: 40px"/>
+							<h:commandButton
+								action="#{beanLogin.checkDataLogin(beanLogin.login)}"
+								value="Logar" class="btn btn-block" style="height: 40px" />
 						</div>
-                    </li>
-                  </ul>
-				</h:form>
-				<!-- ###END FORM LOGIN -->
-				
-			  <div class="row">
-				        <div class="col s12 m4">
-				        <ui:repeat value="#{beanImporte.egressoLis}"  var="cu" >
-				         <div class="card black-test hoverable">
-				            <div class="card-image center align-center">
-				             <h1 class="black-text">#{cu.curso.sigla_curso}</h1>
-				              
-				            </div>
-				         
-				            <div class="card-action  black-text">
-				            <div class="row">
-				              <a href="listaAlunos.xhtml" class="right btn">Ver</a>
-				              </div>
-				            </div>
-				          </div>
-				        
-				        </ui:repeat>
-				         
-				        </div>
-      </div>
+					</li>
+				</ul>
+			</h:form>
+			<!-- ###END FORM LOGIN -->
+
+			<div class="row">
+				<div class="col s12 m4">
+					<ui:repeat value="#{beanImporte.egressoLis}" var="cu">
+						<h:form>
+							<h:commandLink
+								action="#{beanImporte.redirectToList(cu.curso.id_curso)}"
+								value="">
+
+								<div class="card black-test hoverable">
+									<div class="card-image center align-center">
+										<img src="#{cu.curso.url_image}" width="100" height="300" />
+										<h1 class="black-text" style="margin-bottom: -20px">#{cu.curso.sigla_curso.toUpperCase()}</h1>
+										<small class="black-text">#{cu.curso.nome_curso}
+											#{cu.curso.cidade.nome_cidade} -
+											#{cu.curso.cidade.estado.sigla}</small>
+
+									</div>
+
+
+								</div>
+							</h:commandLink>
+						</h:form>
+					</ui:repeat>
+
+				</div>
+			</div>
 
 		</nav>
 	</div>
-<!-- ###END NAV BAR MENU TOP -->	
-	
-		 
+	<!-- ###END NAV BAR MENU TOP -->
+
+
 
 	<!--###BEGIN  MENSAGEM DE ERRO  -->
-	 <h:panelGroup  rendered="#{beanLogin.msg_erro.length() > 0 }" >
-	<div class=" right" style="margin-top: -10px;  margin-bottom: 30px">
-		
-			<div class="card-panel teal lighten-2"  style="border-left:2px solid blue; border-bottom: 2px solid blue;"> 
-        		<i class="material-icons sm pulse">error_outline</i> 
-        		
-        		#{beanLogin.msg_erro}
- 			 </div>
-		 
-	</div>
+	<h:panelGroup rendered="#{beanLogin.msg_erro.length() > 0 }">
+		<div class=" right" style="margin-top: -10px; margin-bottom: 30px">
+
+			<div class="card-panel teal lighten-2"
+				style="border-left: 2px solid blue; border-bottom: 2px solid blue;">
+				<i class="material-icons sm pulse">error_outline</i>
+
+				#{beanLogin.msg_erro}
+			</div>
+
+		</div>
 	</h:panelGroup>
 	<!--###END  MENSAGEM DE ERRO  -->
-	
 
-	
+
+
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript"
 		src="resources/materialize/js/materialize.js"></script>
-	
+
 	<script type="text/javascript" src="resources/materialize/js/init.js"></script>
 </h:body>
 </html>

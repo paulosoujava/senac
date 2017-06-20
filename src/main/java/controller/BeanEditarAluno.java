@@ -43,21 +43,28 @@ public class BeanEditarAluno implements Serializable {
 	public BeanEditarAluno() {
 		// Para recuperar o valor. Vai precisar fazer um cast aqui.
 		this.idAluno = (Integer) SessionUtil.getParam("IDALUNO");
+		
 		PessoaDAO pD = new PessoaDAO();
 		pessoa = pD.CheckById(idAluno);
+		
 		AlunoDAO aD = new AlunoDAO();
+		
 		this.aluno = aD.alunosByID(this.idAluno);
+		
 
 	}
 
 	// EDITAR PESSOA
 	public String editarPessoa(Pessoa p) {
+		
+		System.out.println( " -- - - -- - -- -- - - --"+ this.aluno);
 		PessoaDAO pD = new PessoaDAO();
 		if (pD.editar(p) > 0) {
+			this.pessoa = p;
 			this.msg_icon = ICONSUCCESS;
 			this.msg_color = SUCCESS;
 			this.msg_erro = "Opa, dados aualizado com sucesso";
-			return null;
+			return "";
 		} else {
 			this.msg_icon = ICONDANGER;
 			this.msg_color = DANGER;
@@ -129,16 +136,20 @@ public class BeanEditarAluno implements Serializable {
 
 	public String frmEditPageAluno( Pessoa p ) {
 
-		/*
-		 * VALIDAR DADOS AQUI DADOS PESSOA / ALUNO / CURSO
-		 */
+		String sexo = p.getSexo();
+		
+		if( p != null )
             this.pessoa = p;
 		
+            //bug do milenio
+           this.pessoa.setSexo(sexo);
+           
 		PessoaDAO pD = new PessoaDAO();
 	
 		
 
 		if (pD.editar(pessoa) > 0) {
+			
 			this.msg_icon = ICONINF;
 			this.msg_color = INF;
 			this.msg_erro = "Opa, dados aualizado com sucesso";

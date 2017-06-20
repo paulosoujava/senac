@@ -5,10 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import entity.Aluno;
 import entity.Experiencia;
 import entity.Login;
+import entity.Pessoa;
 
 public class ExeperienciaDAO {
 
@@ -171,4 +174,59 @@ public class ExeperienciaDAO {
 
 		}
 
+		//LISTA EXPERIENCIAS BASEADO NO ID DO CURSO
+		public List<Experiencia> listExperienceByIdCource(Integer idCourse) {
+
+			this.getConexao();
+			Experiencia ex  = null;
+			Pessoa pessoa =null;
+			List<Experiencia> eList = new ArrayList<>();
+			
+			String sql = "SELECT "+
+					" aluno.al_forma_egresso, aluno.al_matricula, aluno.al_situacao,"+
+					"  pessoa.id_pessoa,pessoa.pe_primeiro_nome, pessoa.pe_ultimo_nome, pessoa.pe_cpf,pessoa.pe_telefone,pessoa.pe_dta_nasc,pessoa.pe_sexo,"+
+					" curso.cu_nome,curso.cu_tipo_formacao,curso.cu_qts_fase, curso.cu_texto_adicional,curso.cu_sigla,curso.cu_imagem,"+
+					" cidades.nome, estados.nome, estados.sigla,"+
+					" experiencia.ex_texto_impacto, experiencia.ex_texto_livre "+
+					" FROM aluno "+
+					"  INNER JOIN pessoa ON aluno.id_pessoa = pessoa.id_pessoa"+ 
+					"  INNER JOIN egresso_ids ON egresso_ids.id_pessoa = pessoa.id_pessoa"+ 
+					"  INNER JOIN curso ON curso.id_curso = egresso_ids.id_curso "+
+					"  INNER JOIN cidades ON cidades.id = curso.id_cidade"+
+					"  INNER JOIN estados ON estados.id = cidades.estados_id"+
+					"  INNER JOIN experiencia ON pessoa.id_pessoa = experiencia.id_pessoa"+
+					"  WHERE curso.id_curso =  ?";
+
+			try {
+				PreparedStatement stmt = conexao.prepareStatement(sql);
+				stmt.setInt(1, idCourse);
+
+				// executa
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					 ex = new Experiencia();
+					 pessoa = new Pessoa();
+				    pessoa.setPrimeiro_nome(rs.getString("pessoa.pe_primeiro_nome"));
+				    pessoa.setUltimo_nome(rs.getString("pessoa.pe_ultimo_nome"));
+				    pessoa.setId_pessoa(rs.getInt("pessoa.id_pessoa"));
+					ex.setTxt_impacto(rs.getString("experiencia.ex_texto_impacto"));
+					ex.setTxt_livre(rs.getString("experiencia.ex_texto_livre"));
+					ex.setPessoa(pessoa);
+					eList.add(ex);
+
+				}
+
+				stmt.close();
+				return  eList;
+
+			} catch (SQLException e) {
+				System.out.println("Erro ao obter Experiencia  CheckByIdCourse: " + e.getMessage());
+				e.printStackTrace();
+				return  eList;
+			} finally {
+				ConnectionFactory.fecharConexao(this.conexao);
+			}
+
+		}
+		
 }

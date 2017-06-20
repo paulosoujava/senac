@@ -29,21 +29,10 @@
 	<div class="navbar-fixed">
 		<nav>
 
-			<a href="#!" class="brand-logo" style="padding-left: 10px">Logo</a>
+			<a href="index.xhtml" class="brand-logo" style="padding-left: 10px">Egresso</a>
 
 			<!--###BEGIN FORM LOGIN -->
-			<!--  
-				    inicializa objeto login
-				    submente para validacoes server client side apos validacoes do javascript local client side
-				    e verifica vericidade no banco de dados.
-				    Retornos: 
-				    
-				     index. == view correspondente deve ser reexibida  escopo preservado
-				    
-				     /aluno  -> FORWARD  -> redirecionamento -> atualizacao URL -Redirect=true
-				     
-				     /adm  -> FORWARD -> redirecionamento -> atualizacao URL -Redirect=true
-				 -->
+	
 			<h:form id="loginFrm" style="border:1px solid red">
 				<ul class="right hide-on-med-and-down">
 					<li style="padding: 10px; margin-left: 20px">
@@ -93,18 +82,22 @@
 	
 	<br /><br /><br />
 	<ul class="collapsible popout" data-collapsible="accordion">
+				
+				<ui:repeat var="e" value="#{beanImporte.experiencias}">
+				
 				<li>
 					<div class="collapsible-header">
-						<i class="material-icons">filter_drama</i>Paulo Oliveira 
+						<h4 style="padding: 10px" class="text-flow"> #{e.pessoa.primeiro_nome.toUpperCase()}  #{e.pessoa.ultimo_nome.toUpperCase()}</h4>
 					</div>
 					<div class="collapsible-body" style="background: url('resources/materialize/image/my.jpg');">
 						<div class="card z-depth-5" style="padding: 20px">
 						<blockquote>
-						   TEXTO DE IMPACTO
+						   #{e.txt_impacto}
 						</blockquote>
 						<small style="margin-left: 20px">
-						  SOBRE O CURSO
+						  #{e.txt_livre}
 						</small>
+						<ui:repeat var="em" value="#{beanImporte.setMyList( e.pessoa.id_pessoa )}">
 						<p>
 						    Nome da empresa
 						</p>
@@ -112,26 +105,19 @@
 						   de 12/12/2012 at/e 12/01/2020
 						</small>
 						<p>Análista</p>
+						
+						</ui:repeat>
+						
 						</div>
 						
 					</div>
 				</li>
-				<li>
-					<div class="collapsible-header">
-						<i class="material-icons">place</i>Second
-					</div>
-					<div class="collapsible-body">
-						<span>Lorem ipsum dolor sit amet.</span>
-					</div>
-				</li>
-				<li>
-					<div class="collapsible-header">
-						<i class="material-icons">whatshot</i>Third
-					</div>
-					<div class="collapsible-body">
-						<span>Lorem ipsum dolor sit amet.</span>
-					</div>
-				</li>
+				
+			
+				</ui:repeat>
+				
+					
+		
 			</ul>
 </div>
 

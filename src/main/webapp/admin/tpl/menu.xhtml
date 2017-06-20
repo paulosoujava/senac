@@ -14,12 +14,14 @@
   <div class="nav-wrapper blue">
     <a href="index.xhtml" class="brand-logo" style="margin-left: 7px">Senac</a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="indexListaCurso.xhtml">Curso</a></li>
-      
       <li><a href="indexSenha.xhtml">Senha</a></li>
-      <li><a href="../">Sair</a></li>
+      
       <!-- Dropdown Trigger -->
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Cadastrar<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a class="dropdown-button" href="indexCadastrarCurso.xhtml"  data-activates="dropdown1">Cadastrar<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a class="dropdown-button" href="indexListaCurso.xhtml" data-activates="dropdown1">Listar<i class="material-icons right">arrow_drop_down</i></a></li>
+      
+      
+      <li><a href="#{beanLogin.sair()}">Sair</a></li>
     </ul>
   </div>
 </nav>

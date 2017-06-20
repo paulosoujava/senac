@@ -14,7 +14,7 @@ public class Experiencia {
 	private String txt_livre;
 	private Integer id_pessoa;
 	private List<Empresa> listEmpreas = new ArrayList<>();
-	
+	private Pessoa pessoa;
 	
 			
 	public List<Empresa> getListEmpreas() {
@@ -40,6 +40,12 @@ public class Experiencia {
 	}
 	public void setId_pessoa(Integer id_pessoa) {
 		this.id_pessoa = id_pessoa;
+	}
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 	
 	

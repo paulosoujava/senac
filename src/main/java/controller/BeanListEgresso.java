@@ -21,6 +21,9 @@ public class BeanListEgresso implements Serializable {
 	private static final long serialVersionUID = 6891783942062071310L;
 	private List<Aluno> listAluno = new ArrayList<>();
 	private Integer id;
+	
+	
+	
 	public BeanListEgresso() {}
 	
 	//***************************************************
@@ -39,10 +42,14 @@ public class BeanListEgresso implements Serializable {
 		return listAluno;
 	}
 
+	public Integer getId() {
+		return id;
+	}
 
-	
-	
-	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	//***************************************************
 
 	

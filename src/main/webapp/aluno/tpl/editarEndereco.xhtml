@@ -45,8 +45,7 @@
 											<label for="nomecurso" class="active">Qual o Estado.</label>
 											<h:selectOneMenu value="#{beanEndereco.idEstado}" valueChangeListener="#{beanCurso.ShowCidades}"
 												onchange="submit()">
-											
-												<f:selectItems value="#{beanEndereco.lEstado}" var="r"
+										<f:selectItems value="#{beanEndereco.lEstado}" var="r"
 													itemValue="#{r.id_estado}" itemLabel="#{r.nome}" />
 											</h:selectOneMenu>
 
@@ -108,7 +107,7 @@
 										<div class="card-action">
 											<div class="row">
 												<h:commandButton action="#{beanEndereco.editEndereco( beanEndereco.endereco )}"
-													value="Cadastrar" class="btn right" />
+													value="Editar" class="btn right" />
 											</div>
 										</div>
 								</div>
