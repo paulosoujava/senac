@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:body>
+<div class=" card-panel col.l12 white">
+<!-- ##BEGIN FORMULARIO DE PESQUISA  -->
+			<div class="nav-wrapper white">
+				<h:form style="margin-top: 20px; margin-bottom: 20px"  name="excluir-registro">
+					<div class="input-field">
+					<div class="row">
+						<h:inputText value="#{beanEditarCurso.str_pesq}"   />
+						<label>Pesquisar por? </label> 
+						<span>
+						  <input  type="checkbox" id="nome" /> <label for="nome" style="margin-right: 20px"> Primeiro nome</label>
+						  <input  type="checkbox" id="ultimo"/> <label for="ultimo" style="margin-right: 20px"> Ultimo nome</label>
+						  <input  type="checkbox" id="email"/> <label for="email" style="margin-right: 20px"> Email</label>
+						  <input  type="checkbox" id="cpf"/> <label for="cpf" style="margin-right: 20px"> CPF</label>
+						  </span>
+					</div>
+					
+					<h:commandButton action="#{beanEditarCurso.showPesquisa(beanEditarCurso.str_pesq)}"  value="OK" class="btn green right" />
+					&nbsp;&nbsp;&nbsp;
+					<h:commandButton  action="#{beanEditarCurso.limpaPesquisa()}" rendered="#{beanEditarCurso.pesquisar_flag}" value="Limpar" class="btn red right" />
+				</div>
+				</h:form>
+			</div>
+			<br /><br /><br />
+<!-- ##END FORMULARIO DE PESQUISA  -->
+</div>
+
+
+		<div class=" card-panel col.l12 white">
+			<h:dataTable class="bordered highlight"
+				value="#{beanListarAlunos.listTablePessoa()}" var="e" border="1">
+				<h:column>
+					<f:facet name="header">Nome</f:facet>    				
+				      #{e.primeiro_nome}
+				   </h:column>
+				<h:column>
+					<f:facet name="header">Sobrenome</f:facet>    				
+				      #{e.ultimo_nome}
+				   </h:column>
+				<h:column>
+					<f:facet name="header">Cpf</f:facet>    				
+				      #{e.cpf}
+				   </h:column>
+				<h:column>
+					<f:facet name="header">Data de Nascimento</f:facet>    				
+				      #{e.data_nascimento}
+				   </h:column>
+				<h:column>
+					<f:facet name="header">Matricula</f:facet>    				
+				      #{e.matricula}
+				   </h:column>
+				   	<h:column>
+					<f:facet name="header">Situação</f:facet>    				
+				      #{e.situcao}
+				   </h:column>
+				<h:column>
+					<f:facet name="header">Telefone</f:facet>    				
+				      #{e.telefone}
+				   </h:column>
+				<h:column>
+					<f:facet name="header">Email</f:facet>    				
+				      #{e.login.email}
+				   </h:column>
+				<h:column>
+					<f:facet name="header">Sexo</f:facet>    				
+				      #{e.sexo}
+				   </h:column>
+				<h:column>
+					<f:facet name="header">Situação</f:facet>    				
+				      #{e.situcao}
+				   </h:column>
+				<h:column>
+					<f:facet name="header">Opção</f:facet>
+					<h:form>
+					      <h:commandLink action="#{beanListarAlunos.modoExebicao(e.id_pessoa)}"  >
+				             <i class="material-icons green-text  tooltipped" data-position="bottom" data-tooltip="Clique para editar">edit</i>
+				          </h:commandLink>	
+				          <h:commandLink action="#{beanListarAlunos.modoExebicao(e.id_pessoa)}"  >
+				             <i class="material-icons green-text  tooltipped" data-position="bottom" data-tooltip="Clique para deletar">delete</i>
+				          </h:commandLink>	
+
+					</h:form>
+				</h:column>
+			</h:dataTable>
+			<h:form>
+				<h:commandLink action="#{beanListarAlunos.backList()}" class="btn" value="Voltar" />
+			</h:form>
+		</div>
+
+
+
+
+</h:body>
+</html>
