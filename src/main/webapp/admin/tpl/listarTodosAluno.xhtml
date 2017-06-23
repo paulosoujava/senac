@@ -4,36 +4,55 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:body>
-<div class=" card-panel col.l12 white">
-<!-- ##BEGIN FORMULARIO DE PESQUISA  -->
-			<div class="nav-wrapper white">
-				<h:form style="margin-top: 20px; margin-bottom: 20px"  name="excluir-registro">
-					<div class="input-field">
+	<div class=" card-panel col.l12 white">
+		<!-- ##BEGIN FORMULARIO DE PESQUISA  -->
+		<div class="nav-wrapper white">
+			<h:form style="margin-top: 20px; margin-bottom: 20px"
+				name="excluir-registro">
+				<div class="input-field">
 					<div class="row">
-						<h:inputText value="#{beanEditarCurso.str_pesq}"   />
-						<label>Pesquisar por? </label> 
-						<span>
-						  <input  type="checkbox" id="nome" /> <label for="nome" style="margin-right: 20px"> Primeiro nome</label>
-						  <input  type="checkbox" id="ultimo"/> <label for="ultimo" style="margin-right: 20px"> Ultimo nome</label>
-						  <input  type="checkbox" id="email"/> <label for="email" style="margin-right: 20px"> Email</label>
-						  <input  type="checkbox" id="cpf"/> <label for="cpf" style="margin-right: 20px"> CPF</label>
-						  </span>
+						<div class="card" style="padding: 20px; margin-bottom: -30px">
+							<h:inputText value="#{beanListarPesquisALuno.pesSrt}" />
+							<label>Pesquisar por? </label> <span> <h:selectManyCheckbox 
+									value="#{beanListarPesquisALuno.favNumber1}">
+									<f:selectItem itemValue=" pessoa.pe_primeiro_nome LIKE " itemLabel="Nome" />
+									<f:selectItem itemValue=" pessoa.pe_ultimo_nome LIKE " itemLabel="Sobrenome" />
+									<f:selectItem itemValue=" aluno.al_matricula LIKE " itemLabel="Matricula" />
+									<f:selectItem itemValue=" pessoa.pe_cpf LIKE " itemLabel="Cpf" />
+								</h:selectManyCheckbox>
+							</span>
+
+
+							<h:commandButton action="#{beanListarPesquisALuno.pesquisar()}"
+								value="OK" class="btn green right" />
+							&nbsp;&nbsp;&nbsp;
+							<h:commandButton action="#{beanEditarCurso.limpaPesquisa()}"
+								rendered="#{beanEditarCurso.pesquisar_flag}" value="Limpar"
+								class="btn red right" />
+							<br />
+							<br />
+						</div>
 					</div>
-					
-					<h:commandButton action="#{beanEditarCurso.showPesquisa(beanEditarCurso.str_pesq)}"  value="OK" class="btn green right" />
-					&nbsp;&nbsp;&nbsp;
-					<h:commandButton  action="#{beanEditarCurso.limpaPesquisa()}" rendered="#{beanEditarCurso.pesquisar_flag}" value="Limpar" class="btn red right" />
 				</div>
-				</h:form>
-			</div>
-			<br /><br /><br />
-<!-- ##END FORMULARIO DE PESQUISA  -->
-</div>
+			</h:form>
+		</div>
+		<br /> <br /> <br />
+		<!-- ##END FORMULARIO DE PESQUISA  -->
+	</div>
 
 
-		<div class=" card-panel col.l12 white">
+		
+		<h:panelGroup rendered="#{beanListarPesquisALuno.pesq}">
+	<h2 class="text-flow center">Você pesquisou por [ #{beanListarPesquisALuno.pesSrt} ] e achamos: [ #{beanListarPesquisALuno.alunos.size()} ]</h2>
+		</h:panelGroup>
+	
+	
+	<h:panelGroup rendered="#{beanListarPesquisALuno.tem}">
+	<h2 class="text-flow center"> Sua pesquisa retornou: [ #{beanListarPesquisALuno.alunos.size()} ]</h2>
+		<div class=" card-panel col.l12 white" style="border: 1px solid blue">
 			<h:dataTable class="bordered highlight"
-				value="#{beanListarAlunos.listTablePessoa()}" var="e" border="1">
+				value="#{beanListarPesquisALuno.alunos}" var="e" border="1">
+				
 				<h:column>
 					<f:facet name="header">Nome</f:facet>    				
 				      #{e.primeiro_nome}
@@ -54,7 +73,7 @@
 					<f:facet name="header">Matricula</f:facet>    				
 				      #{e.matricula}
 				   </h:column>
-				   	<h:column>
+				<h:column>
 					<f:facet name="header">Situação</f:facet>    				
 				      #{e.situcao}
 				   </h:column>
@@ -77,20 +96,109 @@
 				<h:column>
 					<f:facet name="header">Opção</f:facet>
 					<h:form>
-					      <h:commandLink action="#{beanListarAlunos.modoExebicao(e.id_pessoa)}"  >
-				             <i class="material-icons green-text  tooltipped" data-position="bottom" data-tooltip="Clique para editar">edit</i>
-				          </h:commandLink>	
-				          <h:commandLink action="#{beanListarAlunos.modoExebicao(e.id_pessoa)}"  >
-				             <i class="material-icons green-text  tooltipped" data-position="bottom" data-tooltip="Clique para deletar">delete</i>
-				          </h:commandLink>	
+						<h:commandLink
+							action="#{beanListarAlunos.modoExebicao(e.id_pessoa)}">
+							<i class="material-icons green-text  tooltipped"
+								data-position="bottom" data-tooltip="Clique para editar">edit</i>
+						</h:commandLink>
+						<h:panelGroup rendered="#{e.login.nivel == -1 }">
+							<h:commandLink
+								action="#{beanListarPesquisALuno.inativar(e.login.id_login)}">
+								<i class="material-icons red-text  tooltipped"
+									data-position="bottom" data-tooltip="Clique para deletar">delete</i>
+							</h:commandLink>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{e.login.nivel == 1 }">
+							<h:commandLink
+								action="#{beanListarPesquisALuno.inativar(e.login.id_login)}">
+								<i class="material-icons red-text  tooltipped"
+									data-position="bottom" data-tooltip="Clique para deletar">delete</i>
+							</h:commandLink>
+						</h:panelGroup>
+						
 
 					</h:form>
 				</h:column>
 			</h:dataTable>
-			<h:form>
-				<h:commandLink action="#{beanListarAlunos.backList()}" class="btn" value="Voltar" />
-			</h:form>
+			<hr />
+			<h2>Outros :</h2>
 		</div>
+	</h:panelGroup>
+
+	<div class=" card-panel col.l12 white">
+		<h:dataTable class="bordered highlight"
+			value="#{beanListarAlunos.listTablePessoa()}" var="e" border="1">
+			<h:column>
+				<f:facet name="header">Nome</f:facet>    				
+				      #{e.primeiro_nome}
+				   </h:column>
+			<h:column>
+				<f:facet name="header">Sobrenome</f:facet>    				
+				      #{e.ultimo_nome}
+				   </h:column>
+			<h:column>
+				<f:facet name="header">Cpf</f:facet>    				
+				      #{e.cpf}
+				   </h:column>
+			<h:column>
+				<f:facet name="header">Data de Nascimento</f:facet>    				
+				      #{e.data_nascimento}
+				   </h:column>
+			<h:column>
+				<f:facet name="header">Matricula</f:facet>    				
+				      #{e.matricula}
+				   </h:column>
+			<h:column>
+				<f:facet name="header">Situação</f:facet>    				
+				      #{e.situcao}
+				   </h:column>
+			<h:column>
+				<f:facet name="header">Telefone</f:facet>    				
+				      #{e.telefone}
+				   </h:column>
+			<h:column>
+				<f:facet name="header">Email</f:facet>    				
+				      #{e.login.email}
+				   </h:column>
+			<h:column>
+				<f:facet name="header">Sexo</f:facet>    				
+				      #{e.sexo}
+				   </h:column>
+			<h:column>
+				<f:facet name="header">Situação</f:facet>    				
+				      #{e.situcao}
+				   </h:column>
+			<h:column>
+				<f:facet name="header">Opção</f:facet>
+				<h:form>
+					<h:commandLink
+						action="#{beanListarAlunos.modoExebicao(e.id_pessoa)}">
+						<i class="material-icons green-text  tooltipped"
+							data-position="bottom" data-tooltip="Clique para editar">edit</i>
+					</h:commandLink>
+					<h:panelGroup rendered="#{e.login.nivel == -1 }">
+							<h:commandLink
+								action="#{beanListarPesquisALuno.inativar(e.login.id_login)}">
+								<i class="material-icons red-text  tooltipped"
+									data-position="bottom" data-tooltip="Clique para deletar">delete</i>
+							</h:commandLink>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{e.login.nivel == 1 }">
+							<h:commandLink
+								action="#{beanListarPesquisALuno.inativar(e.login.id_login)}">
+								<i class="material-icons green-text  tooltipped"
+									data-position="bottom" data-tooltip="Clique para deletar">delete</i>
+							</h:commandLink>
+						</h:panelGroup>
+
+				</h:form>
+			</h:column>
+		</h:dataTable>
+		<h:form>
+			<h:commandLink action="#{beanListarAlunos.backList()}" class="btn"
+				value="Voltar" />
+		</h:form>
+	</div>
 
 
 

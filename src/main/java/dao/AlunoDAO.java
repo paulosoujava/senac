@@ -163,7 +163,7 @@ public class AlunoDAO {
 				// EMAIL DO ALUNO
 				String email = lD.geEmailLogin(rs.getInt("aluno.id_login"));
 				Login l = new Login();
-				
+				 l.setNivel( lD.geNivelLogin(rs.getInt("aluno.id_login")));
 				//curso
 				Curso c = new Curso();
 				Cidade cidade = new Cidade();
@@ -289,7 +289,8 @@ public class AlunoDAO {
 				// EMAIL DO ALUNO
 				String email = lD.geEmailLogin(rs.getInt("aluno.id_login"));
 				Login l = new Login();
-				
+				l.setNivel( lD.geNivelLogin(rs.getInt("aluno.id_login")));
+				l.setId_login(rs.getInt("aluno.id_login"));
 				//curso
 				Curso c = new Curso();
 				Cidade cidade = new Cidade();
@@ -308,6 +309,7 @@ public class AlunoDAO {
 
 				a = new Aluno();
 				a.setCpf(rs.getString("pessoa.pe_cpf"));
+				
 				a.setData_nascimento(rs.getString("pessoa.pe_dta_nasc"));
 				a.setId_pessoa(rs.getInt("pessoa.id_pessoa"));
 				a.setPrimeiro_nome(firstUpCase(rs.getString("pessoa.pe_primeiro_nome")));
@@ -341,6 +343,110 @@ public class AlunoDAO {
 	}
 
 	
+	/**************************************************
+	 * RETURN ALUNO COM LOGIN
+	 ***************************************************/
+	public List<Aluno> pesquisarALuno(  String str1 ) {
+
+		this.getConexao();
+		
+		 
+		
+		Aluno a = null;
+		List<Aluno> listAluno = new ArrayList<>();
+		
+	    String oq = null;
+		
+		
+		if( str1.equals("") ){
+			oq = "  pessoa.pe_primeiro_nome  LIKE  '%" + str1 + "%'";
+		}else{
+			oq =  str1.replaceAll(",", " ");
+		}
+		
+		String sql = " SELECT"
+				+ " aluno.id_login,aluno.al_forma_egresso, aluno.al_matricula, aluno.al_situacao, "+
+				 "  pessoa.id_pessoa, pessoa.pe_primeiro_nome, pessoa.pe_ultimo_nome, pessoa.pe_cpf,pessoa.pe_telefone,pessoa.pe_dta_nasc,pessoa.pe_sexo, "+
+				 " curso.cu_nome,curso.cu_tipo_formacao,curso.cu_qts_fase, curso.cu_texto_adicional,curso.cu_sigla,curso.cu_imagem, "+
+				 " cidades.nome, estados.nome, estados.sigla "+
+				 "  FROM aluno , pessoa, egresso_ids ,  curso , cidades, estados WHERE "+
+				   oq +  
+                 "  aluno.id_pessoa = pessoa.id_pessoa  "+
+                 " AND egresso_ids.id_pessoa = pessoa.id_pessoa  "+
+                 " AND curso.id_curso = egresso_ids.id_curso "+
+				 " AND cidades.id = curso.id_cidade "+
+				 " AND estados.id = cidades.estados_id";
+				
+		
+		System.out.println(sql);
+		
+
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+		
+
+			// executa
+			ResultSet rs = stmt.executeQuery();
+			LoginDAO lD = new LoginDAO();
+			while (rs.next()) {
+
+				// EMAIL DO ALUNO
+				String email = lD.geEmailLogin(rs.getInt("aluno.id_login"));
+				Login l = new Login();
+				l.setNivel( lD.geNivelLogin(rs.getInt("aluno.id_login")));
+				l.setId_login(rs.getInt("aluno.id_login"));
+				
+				//curso
+				Curso c = new Curso();
+				Cidade cidade = new Cidade();
+				Estado estado = new Estado();
+				
+				c.setFase_curso(rs.getInt("curso.cu_qts_fase"));
+				c.setFormacao_curso(rs.getString("curso.cu_tipo_formacao"));
+				c.setNome_curso(rs.getString("curso.cu_nome"));
+				
+				cidade.setNome_cidade(rs.getString("cidades.nome"));
+				estado.setNome(rs.getString("estados.nome"));
+				estado.setSigla(rs.getString("estados.sigla"));
+				cidade.setEstado(estado);
+				c.setCidade(cidade);
+				l.setEmail(email);
+
+				a = new Aluno();
+				a.setCpf(rs.getString("pessoa.pe_cpf"));
+				a.setData_nascimento(rs.getString("pessoa.pe_dta_nasc"));
+				a.setId_pessoa(rs.getInt("pessoa.id_pessoa"));
+				a.setPrimeiro_nome(firstUpCase(rs.getString("pessoa.pe_primeiro_nome")));
+				a.setUltimo_nome(firstUpCase(rs.getString("pessoa.pe_ultimo_nome")));
+				a.setSexo(rs.getString("pessoa.pe_sexo"));
+				a.setTelefone(rs.getString("pessoa.pe_telefone"));
+				a.setSexo(firstUpCase(rs.getString("pessoa.pe_sexo")));
+				a.setForm_egresso(firstUpCase(rs.getString("aluno.al_forma_egresso")));
+				a.setMatricula(rs.getString("aluno.al_matricula"));
+				a.setSitucao(firstUpCase(rs.getString("aluno.al_situacao")));
+				
+				a.setCurso(c);
+				a.setLogin(l);
+				
+				
+				System.err.println( a );
+				listAluno.add(a);
+			}
+			
+			
+
+			stmt.close();
+			return listAluno;
+
+		} catch (SQLException e) {
+			System.out.println("Erro ao obter aluno  alunosByID: " + e.getMessage());
+			e.printStackTrace();
+			return listAluno;
+		} finally {
+			ConnectionFactory.fecharConexao(this.conexao);
+		}
+
+	}
 	
 	
 	
