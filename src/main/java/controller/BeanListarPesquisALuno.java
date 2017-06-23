@@ -63,9 +63,21 @@ public class BeanListarPesquisALuno implements Serializable {
 		return null;
 	}
 	
-	public String inativar( Integer id ){
+	public String inativar( Integer id, Integer nivel  ){
+		Boolean ok = false;
+		
+		if( nivel == 1 ){
+			nivel = -1;
+		}else{
+			ok = true;
+		}
+		
+		if( ok ){
+			nivel = 1;
+		}
+		
 		LoginDAO lG = new LoginDAO();
-		lG.inativarAtivarLogin(id,-1);
+		lG.inativarAtivarLogin(id,nivel );
 		return null;
 	}
 	

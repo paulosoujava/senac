@@ -195,8 +195,9 @@ public class BeanEditarCurso implements Serializable {
 	
 	public String limpaPesquisa(){
 		this.pesquisar_flag = false;
+		this.msg_erro = "";
 		this.str_pesq = "";
-		return "/admin/index?faces-redirect=true";
+		return "/admin/indexListarCurso?faces-redirect=true";
 	}
 
 	/************************************************

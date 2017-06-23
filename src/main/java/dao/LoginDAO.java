@@ -239,8 +239,10 @@ public class LoginDAO {
 
 		Integer ok = 0;
 		this.getConexao();
+		
+		
 
-		String sql = "UPDATE login SET  log_nivel = " + (ativar == 1 ? 1 : -1) + "    WHERE  id_login = ?;";
+		String sql = "UPDATE login SET  log_nivel = " + ( ativar ) + "    WHERE  id_login = ?;";
 		try {
 
 			PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

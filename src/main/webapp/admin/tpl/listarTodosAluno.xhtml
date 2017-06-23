@@ -103,14 +103,14 @@
 						</h:commandLink>
 						<h:panelGroup rendered="#{e.login.nivel == -1 }">
 							<h:commandLink
-								action="#{beanListarPesquisALuno.inativar(e.login.id_login)}">
+								action="#{beanListarPesquisALuno.inativar(e.login.id_login,  e.login.nivel)}">
 								<i class="material-icons red-text  tooltipped"
 									data-position="bottom" data-tooltip="Clique para deletar">delete</i>
 							</h:commandLink>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{e.login.nivel == 1 }">
 							<h:commandLink
-								action="#{beanListarPesquisALuno.inativar(e.login.id_login)}">
+								action="#{beanListarPesquisALuno.inativar(e.login.id_login, e.login.nivel)}">
 								<i class="material-icons red-text  tooltipped"
 									data-position="bottom" data-tooltip="Clique para deletar">delete</i>
 							</h:commandLink>
@@ -178,14 +178,14 @@
 					</h:commandLink>
 					<h:panelGroup rendered="#{e.login.nivel == -1 }">
 							<h:commandLink
-								action="#{beanListarPesquisALuno.inativar(e.login.id_login)}">
+								action="#{beanListarPesquisALuno.inativar(e.login.id_login, e.login.nivel)}">
 								<i class="material-icons red-text  tooltipped"
 									data-position="bottom" data-tooltip="Clique para deletar">delete</i>
 							</h:commandLink>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{e.login.nivel == 1 }">
 							<h:commandLink
-								action="#{beanListarPesquisALuno.inativar(e.login.id_login)}">
+								action="#{beanListarPesquisALuno.inativar(e.login.id_login,  e.login.nivel)}">
 								<i class="material-icons green-text  tooltipped"
 									data-position="bottom" data-tooltip="Clique para deletar">delete</i>
 							</h:commandLink>
