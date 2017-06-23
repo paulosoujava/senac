@@ -359,7 +359,7 @@ public class AlunoDAO {
 		
 		
 		if( str1.equals("") ){
-			oq = "  pessoa.pe_primeiro_nome  LIKE  '%" + str1 + "%'";
+			oq = "  pessoa.pe_primeiro_nome  LIKE  '%" + str1 + "%' AND";
 		}else{
 			oq =  str1.replaceAll(",", " ");
 		}
