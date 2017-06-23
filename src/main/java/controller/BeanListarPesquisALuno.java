@@ -57,6 +57,12 @@ public class BeanListarPesquisALuno implements Serializable {
 		
 		return "";
 	}
+	public String limpar(){
+		this.isPesq = false;
+		this.isTem = false;
+		return null;
+	}
+	
 	public String inativar( Integer id ){
 		LoginDAO lG = new LoginDAO();
 		lG.inativarAtivarLogin(id,-1);

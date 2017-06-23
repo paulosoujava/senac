@@ -26,8 +26,8 @@
 							<h:commandButton action="#{beanListarPesquisALuno.pesquisar()}"
 								value="OK" class="btn green right" />
 							&nbsp;&nbsp;&nbsp;
-							<h:commandButton action="#{beanEditarCurso.limpaPesquisa()}"
-								rendered="#{beanEditarCurso.pesquisar_flag}" value="Limpar"
+							<h:commandButton action="#{beanListarPesquisALuno.limpar()}"
+								rendered="#{beanListarPesquisALuno.pesq}" value="Limpar"
 								class="btn red right" />
 							<br />
 							<br />
@@ -43,12 +43,12 @@
 
 		
 		<h:panelGroup rendered="#{beanListarPesquisALuno.pesq}">
-	<h2 class="text-flow center">Você pesquisou por [ #{beanListarPesquisALuno.pesSrt} ] e achamos: [ #{beanListarPesquisALuno.alunos.size()} ]</h2>
+	<h3 class="text-flow center">Você pesquisou por [ #{beanListarPesquisALuno.pesSrt} ] e achamos: [ #{beanListarPesquisALuno.alunos.size()} ]</h3>
 		</h:panelGroup>
 	
 	
 	<h:panelGroup rendered="#{beanListarPesquisALuno.tem}">
-	<h2 class="text-flow center"> Sua pesquisa retornou: [ #{beanListarPesquisALuno.alunos.size()} ]</h2>
+	
 		<div class=" card-panel col.l12 white" style="border: 1px solid blue">
 			<h:dataTable class="bordered highlight"
 				value="#{beanListarPesquisALuno.alunos}" var="e" border="1">
