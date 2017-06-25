@@ -37,23 +37,34 @@
 							<!--  ###END RECADOS  -->
 							       <div class="row">
 										<div class="input-field col s6">
-											<h:inputText  id="tt" class="validate"  value="#{beanExperiencia.empresa.funcao}"/>
+											<h:inputText  id="tt" class="validate"  value="#{beanExperiencia.empresa.funcao}"
+											required="true" requiredMessage="Digite a função"/>
+											<h:message for="tt" style="color:red; " />
 											<label for="tt" data-error="" data-success="ok">Tipo de trabalho</label>
 										</div>
 									
 										<div class="input-field col s6">
-											<h:inputText  id="ep" class="validate"  value="#{beanExperiencia.empresa.empresa}" />
+											<h:inputText  id="ep" class="validate"  value="#{beanExperiencia.empresa.empresa}" 
+											required="true" requiredMessage="Digite o nome da empresa"/>
+											<h:message for="ep" style="color:red; " />
 											<label for="ep" data-error="" data-success="ok">Empresa ou instituição contratante</label>
 										</div>
 									</div>
 									
 									<div class="row">
 										<div class="input-field col s6">
-											<h:inputText  id="dtI" class="validate" value="#{beanExperiencia.empresa.data_entrada}" />
+											<h:inputText  id="dtI" class="validate" value="#{beanExperiencia.empresa.data_entrada}" onkeypress="Mascara(this,Data);"
+						           			size="10"
+						          			maxlength="10" required="true" requiredMessage="Digite data de entrada" />
+						          			<h:message for="dtI" style="color:red; " />
 											<label for="dtI" data-error="" data-success="ok">Data de ingresso</label>
 										</div>
 										<div class="input-field col s6">
-											<h:inputText  id="dtS" class="validate" value="#{beanExperiencia.empresa.data_saida}" />
+											<h:inputText  id="dtS" class="validate" value="#{beanExperiencia.empresa.data_saida}" 
+											required="true" requiredMessage="Digite a data de saida" onkeypress="Mascara(this,Data);"
+						           			size="10"
+						          			maxlength="10" />
+						          			<h:message for="dtS" style="color:red; " />
 											<label for="dtS" data-error="" data-success="ok">Data de saida</label>
 											<h:inputHidden value="#{beanExperiencia.empresa.idAluno}" />
 											<h:inputHidden value="#{beanExperiencia.empresa.idEmpresa}" />
@@ -62,7 +73,9 @@
 								
 									<div class="row">
 										<div class="input-field col s12">
-										 <h:inputText  id="dtL" class="validate" value="#{beanExperiencia.empresa.txt_livre}" />
+										 <h:inputText  id="dtL" class="validate" value="#{beanExperiencia.empresa.txt_livre}"
+										  required="true" requiredMessage="Digite alguma coisa" />
+										 <h:message for="dtL" style="color:red; " />
 											<label for="txtLivre" data-error="" data-success="ok">Fale um pouco sobre o que fazia por lá.</label>
 										</div>
 										

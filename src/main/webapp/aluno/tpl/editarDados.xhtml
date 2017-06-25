@@ -55,14 +55,18 @@
 										<div class="input-field col s6">
 											<h:inputText id="first_name"
 												value="#{beanEditarAluno.aluno.primeiro_nome}"
+												required="true" requiredMessage="Digite o primeiro nome"
 												class="validate" pt:type="text"></h:inputText>
+												<h:message for="first_name" style="color:red; " />
 											<label for="first_name" data-error="Digite seu nome"
 												data-success="ok">Primeiro Nome</label>
 										</div>
 										<div class="input-field col s6">
 											<h:inputText id="last_name"
 												value="#{beanEditarAluno.aluno.ultimo_nome}"
+												required="true" requiredMessage="Digite o ultimo nome"
 												class="validate" pt:type="text" />
+												<h:message for="last_name" style="color:red; " />
 											<label for="last_name" data-error="Digite seu ultimo nome"
 												data-success="ok">Ultimo Nome</label>
 										</div>
@@ -71,14 +75,22 @@
 									<div class="row">
 										<div class="input-field col s6">
 											<h:inputText id="cpf" value="#{beanEditarAluno.aluno.cpf}"
-												class="validate" pt:type="text" />
+											required="true" requiredMessage="Digite o cpf"
+												class="validate" pt:type="text" onkeypress="Mascara(this,Cpf);"
+						           			size="14"
+						          			maxlength="14"  />
+						          			<h:message for="cpf" style="color:red; " />
 											<label for="cpf" data-error="Digite seu cpf"
 												data-success="ok">CPF</label>
 										</div>
 										<div class="input-field col s6">
 											<h:inputText id="tel"
 												value="#{beanEditarAluno.aluno.telefone}" class="validate"
-												pt:type="text" />
+												required="true" requiredMessage="Digite o telefone"
+												pt:type="text" onkeypress="Mascara(this,Telefone);"
+						          size="14"
+						          maxlength="14" />
+						          			<h:message for="tel" style="color:red; " />
 											<label for="tel" data-error="Digite seu telefone"
 												data-success="ok">Telefone</label>
 										</div>
@@ -88,9 +100,13 @@
 										<div class="input-field col s6">
 											<h:inputText id="data"
 												value="#{beanEditarAluno.aluno.data_nascimento}"
-												class="validate" pt:type="text" />
+												required="true" requiredMessage="Digite a data de nascimento"
+												class="validate" pt:type="text" onkeypress="Mascara(this,Data);"
+						           			size="10"
+						          			maxlength="10" />
+						          			<h:message for="data" style="color:red; " />
 											<label for="data" data-error="Digite seu cpf"
-												data-success="ok"></label>
+												data-success="ok">Data de nascimento</label>
 										</div>
 													<h:inputHidden value="#{beanEditarAluno.aluno.id_pessoa}" />
 													<h:inputHidden value="#{beanEditarAluno.pessoa.id_pessoa}" />

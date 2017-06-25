@@ -60,7 +60,9 @@
 									<div class="input-field col s6">
 										<h:inputText value="#{beanEditarAluno.pessoa.telefone}"
 											required="true" requiredMessage="Digite um telefone"
-											id="tel" class="validate">
+											id="tel" class="validate" onkeypress="Mascara(this,Telefone);"
+						          size="14"
+						          maxlength="14" >
 											<f:validateLength for="tel" minimum="1" />
 										</h:inputText>
 										<h:message for="tel" style="color:red; " />
@@ -70,7 +72,8 @@
 										<h:inputText value="#{beanEditarAluno.pessoa.sexo}" id="Sexo"
 											required="true"
 											requiredMessage="Digite p sexo"
-											class="validate">
+											class="validate" size="1"
+						          maxlength="1" >
 										</h:inputText>
 										<h:message showDetail="Sexo" showSummary="true" for="fase"
 											style="color:red; " />
@@ -82,7 +85,9 @@
 									<div class="input-field col s6">
 										<h:inputText value="#{beanEditarAluno.pessoa.cpf}"
 											required="true" requiredMessage="Qual cpf"
-											id="cpf" class="validate">
+											id="cpf" class="validate" onkeypress="Mascara(this,Cpf);"
+						           			size="14"
+						          			maxlength="14">
 											<f:validateLength for="cpf" minimum="1" />
 										</h:inputText>
 										<h:message for="cpf" style="color:red; " />
@@ -91,7 +96,9 @@
 									<div class="input-field col s6">
 										<h:inputText value="#{beanEditarAluno.pessoa.data_nascimento}"
 											required="true" requiredMessage="Qual a data de nascimento"
-											id="dtaNasc" class="validate">
+											id="dtaNasc" class="validate" onkeypress="Mascara(this,Data);"
+						           			size="10"
+						          			maxlength="10">
 											<f:validateLength for="dtNasc" minimum="1" />
 										</h:inputText>
 										<h:message for="dtNasc" style="color:red; " />
@@ -125,7 +132,7 @@
 									<div class="input-field col s6">
 										<h:inputText value="#{beanEditarAluno.aluno.matricula}"
 											required="true" requiredMessage="Matricula"
-											id="mat" class="validate">
+											id="mat" class="validate" onkeypress="Mascara(this, Matricula)" size="16" maxlength="16">
 											<f:validateLength for="mat" minimum="1" />
 										</h:inputText>
 										<h:message for="mat" style="color:red; " />
