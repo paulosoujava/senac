@@ -3,6 +3,7 @@ package controller;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -125,6 +126,7 @@ public class BeanLogin implements Serializable {
 			SessionUtil.setParam("LOGADO", "LOGADO");
 		//	sessao.setAttribute("pessoaLogada", this.login);
 			return "/admin/index?faces-redirect=true";
+			
 		
 		// nao possui cadastro no sistema
 		default: 
@@ -148,8 +150,60 @@ public class BeanLogin implements Serializable {
 //****************************************************************************************************************
 //##END  PRIVATE METHOD  	
 //****************************************************************************************************************	
-
-		
+	 
+	 // implemenção do filtro
+	 
+	 
+//	 private Aluno aluno;
+//	 private String emailInformado;
+//	 private String senhaInformada;
+//
+//	 public String autenticar() {
+//
+//			String paginaDestino;
+//
+//			// Chamar o DAO para verificar se o login e a senha estão corretos
+//			LoginDAO dao = new LoginDAO();
+//			Aluno pessoaFazendoLogin = dao.geIdPessoLogin(emailInformado, senhaInformada);
+//			
+//			//Obtem a Sessao
+//			FacesContext context = FacesContext.getCurrentInstance();
+//			HttpServletRequest request = (HttpServletRequest) 
+//					context.getExternalContext().getRequest();
+//			
+//			HttpSession sessao = request.getSession();
+//			// Caso sim:
+//			if(pessoaFazendoLogin != null){
+//				// Adicionar a pessoa na Session
+//				sessao.setAttribute("pessoaLogada", pessoaFazendoLogin);
+//				
+//				// encaminhar para a página de sucesso
+//				paginaDestino = "/aluno/index.xhtml?faces-redirect=true";
+//			}else{
+//				sessao.invalidate();
+//				
+//				// Caso contrário: encaminhar para a página de erro
+//				paginaDestino = "/index.xhtml";
+//			}
+//
+//			return paginaDestino;
+//		}
+//
+//		public Aluno getAluno() {
+//			if(this.aluno == null){
+//				//Recupera da sessao
+//				
+//				//Obtem a Sessao
+//				FacesContext context = FacesContext.getCurrentInstance();
+//				HttpServletRequest request = (HttpServletRequest) 
+//						context.getExternalContext().getRequest();
+//				
+//				HttpSession sessao = request.getSession();
+//				aluno = (Aluno) sessao.getAttribute("pessoaLogada");
+//			}
+//			
+//			return aluno;
+//		}
 		
 
 	

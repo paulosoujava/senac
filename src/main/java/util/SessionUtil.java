@@ -3,7 +3,11 @@ package util;
 import java.io.IOException;
 
 import javax.faces.context.FacesContext;
+
 import javax.servlet.FilterChain;
+
+
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -17,7 +21,7 @@ import entity.Login;
 /*
  * CLASSE HELPER UTILIZADA PARA ARMAZENAR PARAMETRO DE PAGINA PARA PAGINA
  */
-public class SessionUtil {
+public class SessionUtil{
 
     public static HttpSession getSession() {
         FacesContext ctx = FacesContext.getCurrentInstance();
@@ -70,4 +74,5 @@ public class SessionUtil {
 
 
 
+	
 }

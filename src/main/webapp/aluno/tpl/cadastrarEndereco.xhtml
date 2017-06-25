@@ -78,37 +78,51 @@
 										<div class="row">
 											<div class="input-field col s6">
 												<h:inputText id="endereco" class="validate"
-													value="#{beanEndereco.endereco.logradouro}" />
+												
+													value="#{beanEndereco.endereco.logradouro}" 
+													required="true" requiredMessage="Digite o logradouro"/>
+													<h:message for="endereco" style="color:red; " />
 												<label for="endereco" data-error="Digite seu endereço"
-													data-success="ok">Endereço</label>
+													data-success="ok">Logradouro</label>
 											</div>
 											<div class="input-field col s6">
 												<h:inputText id="numero" type="text" class="validate"
+												required="true" requiredMessage="Digite o número"
 													value="#{beanEndereco.endereco.numero}" />
+													 <h:message for="numero" style="color:red; " />
 												<label for="numero">Número</label>
 											</div>
 										</div>
 										<div class="row">
 											<div class="input-field col s6">
 												<h:inputText id="comp" class="validate"
+												required="true" requiredMessage="Digite o complemento"
 													value="#{beanEndereco.endereco.comp}" />
+													 <h:message for="comp" style="color:red; " />
 												<label for="comp" data-error="Complemento" data-success="ok">Complemento</label>
 											</div>
 											<div class="input-field col s6">
 												<h:inputText id="referencia" type="text" class="validate"
-													value="#{beanEndereco.endereco.ref}" /> <label
-													for="referencia">Referencia</label>
+													value="#{beanEndereco.endereco.ref}" 
+													required="true" requiredMessage="Digite a referência"/> 
+													<h:message for="referencia" style="color:red; " />
+													<label for="referencia">Referencia</label>
 											</div>
 										</div>
 										<div class="row">
 											<div class="input-field col s6">
 												<h:inputText id="bai" class="validate"
-													value="#{beanEndereco.endereco.rua}" />
+													value="#{beanEndereco.endereco.rua}" 
+													required="true" requiredMessage="Digite o bairro"/> 
+													<h:message for="bai" style="color:red; " />
 												<label for="bai" data-error="Complemento" data-success="ok">Bairro</label>
 											</div>
 											<div class="input-field col s6">
 												<h:inputText  id="cep" type="text" class="validate"
-													value="#{beanEndereco.endereco.cep}" /> <label for="cep">CEP</label>
+													value="#{beanEndereco.endereco.cep}" size="8"
+						          			maxlength="8" required="true" requiredMessage="Digite o cep"/> 
+						          			<h:message for="bai" style="color:red; " />
+						          			<label for="cep">CEP</label>
 											</div>
 										</div>
 										<div class="card-action">
