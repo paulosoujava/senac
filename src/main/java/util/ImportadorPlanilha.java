@@ -250,7 +250,7 @@ public class ImportadorPlanilha {
 		
 		//DADOS LOGIN
 	    log.setEmail( celulaEmail.toString() );
-	    log.setSenha(cpfSemPontos.substring(0, 3) ); //33 primeiros caracteres do cpf
+	    log.setSenha(cpfSemPontos.substring(0, 3) ); //3 primeiros caracteres do cpf
 	    log.setNivel( 1 );  // ADM = 2 ALUNO 1
 		
 		//DADOS EGRESO

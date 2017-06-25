@@ -27,13 +27,13 @@
 <h:body>
 	<!-- ###BEGIN  NAV BAR MENU TOP -->
 	<div class="navbar-fixed">
-		<nav>
+		<nav class="blue">
 
 			<a href="index.xhtml" class="brand-logo" style="padding-left: 10px">Egresso</a>
 
 			<!--###BEGIN FORM LOGIN -->
 	
-			<h:form id="loginFrm" style="border:1px solid red">
+			<h:form id="loginFrm" >
 				<ul class="right hide-on-med-and-down">
 					<li style="padding: 10px; margin-left: 20px">
 
@@ -54,7 +54,7 @@
 						<div class="input-field col s12">
 							<h:commandButton
 								action="#{beanLogin.checkDataLogin(beanLogin.login)}"
-								value="Logar" class="btn btn-block" style="height: 40px" />
+								value="Logar" class="blue btn btn-block" style="height: 40px; border:1px solid black" />
 						</div>
 					</li>
 				</ul>
@@ -81,6 +81,13 @@
 	<!--###END  MENSAGEM DE ERRO  -->
 	
 	<br /><br /><br />
+	
+	<h:panelGroup rendered="#{beanImporte.experiencias.size() == 0}">
+	  <h2 class="center"> Opss, nenhuma experiência foi cadastrada ainda..<br /> volte mais tarde.</h2>
+	  <div class="center">
+	  <img class=" z-depth-5 img-circule" src="http://www.media.inaf.it/wp-content/uploads/2014/02/Einstein_laughing.jpeg"/>
+	  </div>
+	</h:panelGroup>
 	<ul class="collapsible popout" data-collapsible="accordion">
 				
 				<ui:repeat var="e" value="#{beanImporte.experiencias}">

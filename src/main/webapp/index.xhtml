@@ -29,7 +29,7 @@
 	<div class="navbar-fixed">
 		<nav class="blue" >
 
-			<a href="#!" class="brand-logo" style="padding-left: 10px">Egresso</a>
+			<a href="#!" class="brand-logo" style="padding-left: 10px; ">Egresso</a>
 
 			<!--###BEGIN FORM LOGIN -->
 
@@ -46,7 +46,7 @@
 					</li>
 
 					<li style="padding: 10px; margin-left: 20px">
-						<div class="input-field col s12  black-text">
+						<div class="input-field col s12  black-text ">
 							<h:inputSecret value="#{beanLogin.login.senha}"
 								style="border: 1px solid white; background: white; height: 40px" />
 						</div>
@@ -55,16 +55,36 @@
 						<div class="input-field col s12">
 							<h:commandButton
 								action="#{beanLogin.checkDataLogin(beanLogin.login)}"
-								value="Logar" class="btn btn-block" style="height: 40px" />
+								value="Logar" class="blue btn btn-block" style="height: 40px; border:1px solid black" />
 						</div>
 					</li>
 				</ul>
 			</h:form>
 			<!-- ###END FORM LOGIN -->
+		</nav>
+	</div> 
+		<!--###BEGIN  MENSAGEM DE ERRO  -->
+	<h:panelGroup rendered="#{beanLogin.msg_erro.length() > 0 }">
+		<div style="margin-top: -10px; margin-bottom: 30px">
 
+			<div class="card-panel white lighten-2"
+				style="border-left: 2px solid red; border-right: 2px solid red; border-bottom: 2px solid red;">
+				<span class="center red-text" style="margin-left: 20px">
+				<i class="material-icons sm pulse">error_outline</i>
+
+				#{beanLogin.msg_erro}
+				</span>
+			</div>
+
+		</div>
+	</h:panelGroup>
+	<!--###END  MENSAGEM DE ERRO  -->
+		
 			<div class="row">
-				<div class="col s12 m4">
-					<ui:repeat value="#{beanImporte.egressoLis}" var="cu">
+			<ui:repeat value="#{beanImporte.egressoLis}" var="cu">
+			
+				<div class="col s12 m4 l4"  >
+					<div class="row">
 						<h:form>
 							<h:commandLink
 								action="#{beanImporte.redirectToList(cu.curso.id_curso)}"
@@ -73,10 +93,10 @@
 								<div class="card black-test hoverable">
 									<div class="card-image center align-center">
 										<img src="#{cu.curso.url_image}" width="100" height="300" />
-										<h1 class="black-text" style="margin-bottom: -20px">#{cu.curso.sigla_curso.toUpperCase()}</h1>
-										<small class="black-text">#{cu.curso.nome_curso}
+										<h2 class="black-text" style="margin-bottom: 20px">#{cu.curso.sigla_curso.toUpperCase()}</h2>
+										<p class="black-text center">#{cu.curso.nome_curso}
 											#{cu.curso.cidade.nome_cidade} -
-											#{cu.curso.cidade.estado.sigla}</small>
+											#{cu.curso.cidade.estado.sigla}</p> <br />
 
 									</div>
 
@@ -84,31 +104,16 @@
 								</div>
 							</h:commandLink>
 						</h:form>
-					</ui:repeat>
+					</div>
 
 				</div>
-			</div>
-
-		</nav>
-	</div>
-	<!-- ###END NAV BAR MENU TOP -->
-
+			</ui:repeat>
+  		</div>
+		
+	
 
 
-	<!--###BEGIN  MENSAGEM DE ERRO  -->
-	<h:panelGroup rendered="#{beanLogin.msg_erro.length() > 0 }">
-		<div class=" right" style="margin-top: -10px; margin-bottom: 30px">
 
-			<div class="card-panel teal lighten-2"
-				style="border-left: 2px solid blue; border-bottom: 2px solid blue;">
-				<i class="material-icons sm pulse">error_outline</i>
-
-				#{beanLogin.msg_erro}
-			</div>
-
-		</div>
-	</h:panelGroup>
-	<!--###END  MENSAGEM DE ERRO  -->
 
 
 

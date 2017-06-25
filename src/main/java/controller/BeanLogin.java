@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import dao.LoginDAO;
 import entity.Aluno;
@@ -27,7 +30,12 @@ public class BeanLogin implements Serializable {
 	protected Login login = new Login();
 	// mensagens de erros referente a validacoes
 	//read-only
-	protected String msg_erro; 
+	private String msg_erro; 
+	private Boolean tem;
+	
+	HttpSession sessao;
+	HttpServletRequest request;
+	FacesContext context;
 	
 	
 	public BeanLogin() { }
@@ -36,7 +44,11 @@ public class BeanLogin implements Serializable {
 	public String sair(){
 		this.msg_erro = new String();
 		this.login = new Login();
-		return "../index.xhtml?faces-redirect=true";
+		//sessao.invalidate();
+		if( SessionUtil.getParam("LOGADO").equals("LOGADO")){
+			SessionUtil.remove("LOGADO");
+		}
+		return "../index.xhtml";
 	}
 	
 	//************************************************************
@@ -55,6 +67,12 @@ public class BeanLogin implements Serializable {
 				this.msg_erro = "Opss, você precisa digitar um e-mail válido. Ex.: nome@dominio.com";
 				
 			}else{
+				
+				
+				//Obtem a Sessao
+//				 context = FacesContext.getCurrentInstance();
+//				 request = (HttpServletRequest) context.getExternalContext().getRequest();
+//				 sessao = request.getSession();
 				//tudo ok por aqui
 				return this.checkDaoLogin();
 			}
@@ -64,7 +82,7 @@ public class BeanLogin implements Serializable {
 	    	return null;
 	    	
 	  }catch (Exception e) {
-		     this.msg_erro = "Opss, você precisa preencher os dados: e-mail e login";	
+		     this.msg_erro = "Opss, você precisa preencher os dados: e-mail e logins";	
 		     return null;
 	       }
 	  
@@ -97,13 +115,15 @@ public class BeanLogin implements Serializable {
 			 //COLOCA O ID DA PESSOA E DO LOGIN  NA SESSAO 
 			SessionUtil.setParam("IDALUNO",a.getId_pessoa() );
 			SessionUtil.setParam("IDLOGIN",a.getLogin().getId_login() );
-			
+			//sessao.setAttribute("pessoaLogada", this.login);
 			//redireciona
 			return "/aluno/index?faces-redirect=true";
 		
 		case 2: 
 			 //COLOCA O ID DA PESSOA   NA SESSAO 
 			SessionUtil.setParam("IDPESSOAADM", 1);
+			SessionUtil.setParam("LOGADO", "LOGADO");
+		//	sessao.setAttribute("pessoaLogada", this.login);
 			return "/admin/index?faces-redirect=true";
 		
 		// nao possui cadastro no sistema
@@ -113,7 +133,7 @@ public class BeanLogin implements Serializable {
 		}
 	}
 	
-	
+
 	
 	//************************************************************
 	//VALIDATION FRONT-END  BACK SIDE ( VALIDACAO NO SERVIDOR )
@@ -155,6 +175,18 @@ public class BeanLogin implements Serializable {
 		return msg_erro;
 	}
 
+	public Boolean getTem() {
+		this.tem = (SessionUtil.getParam("LOGADO").equals("LOGADO"));
+		return tem;
+	}
+
+	public void setTem(Boolean tem) {
+		this.tem = tem;
+	}
+
+	
+	
+	
 	//******************************************************
 
 }

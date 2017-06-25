@@ -142,7 +142,7 @@ public class EgressoDAO {
 			this.getConexao();
 			List<Egresso> listE = new ArrayList<>();
 			
-			String sql =" SELECT * FROM egresso " ;
+			String sql =" SELECT * FROM egresso" ;
 					
 			
 		
@@ -155,7 +155,7 @@ public class EgressoDAO {
 					
 					CursoDAO cD = new CursoDAO();
 					Curso c = cD.readAllDataCursoById(rs.getInt("id_curso"));
-					c.setId_curso(rs.getInt("id_curso"));
+					c.setId_curso( rs.getInt("id_curso") );
 					//Egresso
 					e.setAno(rs.getInt("eg_ano"));
 				
