@@ -46,9 +46,7 @@ public class BeanLogin implements Serializable {
 		this.msg_erro = new String();
 		this.login = new Login();
 		//sessao.invalidate();
-		if( SessionUtil.getParam("LOGADO").equals("LOGADO")){
-			SessionUtil.remove("LOGADO");
-		}
+	
 		return "../index.xhtml";
 	}
 	
@@ -151,7 +149,7 @@ public class BeanLogin implements Serializable {
 //##END  PRIVATE METHOD  	
 //****************************************************************************************************************	
 	 
-	 // implemenção do filtro
+	 // implemenï¿½ï¿½o do filtro
 	 
 	 
 //	 private Aluno aluno;
@@ -162,7 +160,7 @@ public class BeanLogin implements Serializable {
 //
 //			String paginaDestino;
 //
-//			// Chamar o DAO para verificar se o login e a senha estão corretos
+//			// Chamar o DAO para verificar se o login e a senha estï¿½o corretos
 //			LoginDAO dao = new LoginDAO();
 //			Aluno pessoaFazendoLogin = dao.geIdPessoLogin(emailInformado, senhaInformada);
 //			
@@ -177,12 +175,12 @@ public class BeanLogin implements Serializable {
 //				// Adicionar a pessoa na Session
 //				sessao.setAttribute("pessoaLogada", pessoaFazendoLogin);
 //				
-//				// encaminhar para a página de sucesso
+//				// encaminhar para a pï¿½gina de sucesso
 //				paginaDestino = "/aluno/index.xhtml?faces-redirect=true";
 //			}else{
 //				sessao.invalidate();
 //				
-//				// Caso contrário: encaminhar para a página de erro
+//				// Caso contrï¿½rio: encaminhar para a pï¿½gina de erro
 //				paginaDestino = "/index.xhtml";
 //			}
 //

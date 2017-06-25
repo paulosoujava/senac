@@ -32,8 +32,8 @@
 			<a href="index.xhtml" class="brand-logo" style="padding-left: 10px">Egresso</a>
 
 			<!--###BEGIN FORM LOGIN -->
-	
-			<h:form id="loginFrm" >
+
+			<h:form id="loginFrm">
 				<ul class="right hide-on-med-and-down">
 					<li style="padding: 10px; margin-left: 20px">
 
@@ -54,7 +54,8 @@
 						<div class="input-field col s12">
 							<h:commandButton
 								action="#{beanLogin.checkDataLogin(beanLogin.login)}"
-								value="Logar" class="blue btn btn-block" style="height: 40px; border:1px solid black" />
+								value="Logar" class="blue btn btn-block"
+								style="height: 40px; border:1px solid black" />
 						</div>
 					</li>
 				</ul>
@@ -62,71 +63,81 @@
 			<!-- ###END FORM LOGIN -->
 		</nav>
 
-	<!-- ###END NAV BAR MENU TOP -->
-	
-		<!--###BEGIN  MENSAGEM DE ERRO  -->
+		<!-- ###END NAV BAR MENU TOP -->
+<br/><br/><br/>
+	<!--###BEGIN  MENSAGEM DE ERRO  -->
 	<h:panelGroup rendered="#{beanLogin.msg_erro.length() > 0 }">
-		<div class=" right" style="margin-top: 50px;">
+		<div style="margin-top: -10px; margin-bottom: 30px">
 
-			<div class="card-panel teal lighten-2"
-				style="border-left: 2px solid blue; border-bottom: 2px solid blue;">
+			<div class="card-panel white lighten-2"
+				style="border-left: 2px solid red; border-right: 2px solid red; border-bottom: 2px solid red;">
+				<span class="center red-text" style="margin-left: 20px">
 				<i class="material-icons sm pulse">error_outline</i>
 
 				#{beanLogin.msg_erro}
+				</span>
 			</div>
 
 		</div>
-		<br /><br /><br />
 	</h:panelGroup>
 	<!--###END  MENSAGEM DE ERRO  -->
-	
-	<br /><br /><br />
-	
-	<h:panelGroup rendered="#{beanImporte.experiencias.size() == 0}">
-	  <h2 class="center"> Opss, nenhuma experiência foi cadastrada ainda..<br /> volte mais tarde.</h2>
-	  <div class="center">
-	  <img class=" z-depth-5 img-circule" src="http://www.media.inaf.it/wp-content/uploads/2014/02/Einstein_laughing.jpeg"/>
-	  </div>
-	</h:panelGroup>
-	<ul class="collapsible popout" data-collapsible="accordion">
-				
-				<ui:repeat var="e" value="#{beanImporte.experiencias}">
-				
+
+		<br />
+		<br />
+		<br />
+
+		<h:panelGroup rendered="#{beanImporte.experiencias.size() == 0}">
+			<h2 class="center">
+				Opss, nenhuma experiência foi cadastrada ainda..<br /> volte mais
+				tarde.
+			</h2>
+			<div class="center">
+				<img class=" z-depth-5 img-circule"
+					src="http://www.media.inaf.it/wp-content/uploads/2014/02/Einstein_laughing.jpeg" />
+			</div>
+		</h:panelGroup>
+		<ul class="collapsible popout" data-collapsible="accordion">
+
+			<ui:repeat var="e" value="#{beanImporte.experiencias}">
+
 				<li>
 					<div class="collapsible-header">
-						<h4 style="padding: 10px" class="text-flow"> #{e.pessoa.primeiro_nome.toUpperCase()}  #{e.pessoa.ultimo_nome.toUpperCase()}</h4>
+						<h4 style="padding: 10px" class="text-flow">
+							#{e.pessoa.primeiro_nome.toUpperCase()}
+							#{e.pessoa.ultimo_nome.toUpperCase()}</h4>
 					</div>
-					<div class="collapsible-body" style="background: url('resources/materialize/image/my.jpg');">
+					<div class="collapsible-body"
+						style="background: url('resources/materialize/image/my.jpg');">
 						<div class="card z-depth-5" style="padding: 20px">
-						<blockquote>
-						   #{e.txt_impacto}
-						</blockquote>
-						<small style="margin-left: 20px">
-						  #{e.txt_livre}
-						</small>
-						<ui:repeat var="em" value="#{beanImporte.setMyList( e.pessoa.id_pessoa )}">
-						<p>
-						    Nome da empresa
-						</p>
-						<small style="margin-left: 20px">
-						   de 12/12/2012 at/e 12/01/2020
-						</small>
-						<p>Análista</p>
-						
-						</ui:repeat>
-						
+							<blockquote>#{e.txt_impacto}</blockquote>
+							<small style="margin-left: 20px"> #{e.txt_livre} </small>
+							<p class="teal z-depth-5" style="padding: 10px	">Empresas</p>
+							<ui:repeat var="em"
+								value="#{beanImporte.setMyList( e.pessoa.id_pessoa )}">
+								<div class="card hoverable" style="padding: 10px">
+								<p>#{em.empresa}<br />  
+								 <span style="margin-left: 20px">função #{em.funcao.toLowerCase()}
+								 Entrada: #{em.data_entrada} -  Saída: #{em.data_saida}
+								</span></p>
+								 <BLOCKQUOTE>#{em.txt_livre}</BLOCKQUOTE> 
+								
+								</div>
+								
+					
+							</ui:repeat>
+
 						</div>
-						
+
 					</div>
 				</li>
-				
-			
-				</ui:repeat>
-				
-					
-		
-			</ul>
-</div>
+
+
+			</ui:repeat>
+
+
+
+		</ul>
+	</div>
 
 
 
